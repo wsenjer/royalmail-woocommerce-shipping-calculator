@@ -20,12 +20,13 @@
                                 <div class="inside">
                                     <div class="support-widget">
                                         <ul>
-                                            <li>» UK Guarnteed</li>
-                                            <li>» UK Signed</li>
-                                            <li>» UK Parcelforce</li>
+                                            <li>» UK Guaranteed</li>
+                                            <li>» UK Confirmed</li>
+                                            <li>» UK Standard</li>
+                                            <li>» UK Parcelforce Worldwide</li>
                                             <li>» International Shipping</li>
-                                            <li>» Customizable Domestic Shipping</li>
                                             <li>» Letters Shipping</li>
+                                            <li>» Customizable Domestic Shipping</li>
                                             <li>» Handling Fees and Discounts</li>
                                             <li>» Display the Cheapest option</li>
                                             <li>» Dropshipping Support</li>
