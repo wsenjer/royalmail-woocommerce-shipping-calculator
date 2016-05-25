@@ -32,7 +32,7 @@
                                             <li>» Auto Hassle-Free Updates</li>
                                             <li>» High Priority Customer Support</li>
                                         </ul>
-										<a href="https://wpruby.com/plugin/australia-post-woocommerce-extension-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a> 
+										<a href="https://wpruby.com/plugin/woocommerce-royal-mail-shipping-method-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a> 
                                     </div>
                                 </div>
 	                        </div>
