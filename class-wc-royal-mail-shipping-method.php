@@ -7,71 +7,12 @@
  * */
 class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
-
-
-	public $supported_services = array(
+	private $supported_services = array(
 		'firstclasssmall'					=>	'Standard First Class Small Parcel',
 		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
 		'secondclasssmallparcel'			=>	'Second Class: Small Parcel',
 		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
-		'specialdelivery9am'				=>	'Special Delivery: Guaranteed by 9am',
-		'specialdelivery1pm'				=>	'Special Delivery: Guaranteed by 1pm',
-		'specialdelivery1pmsaturday'		=>	'Special Delivery: Guaranteed by 1pm Saturday',
-		'specialdelivery9amsaturday'		=>	'Special Delivery: Guaranteed by 9am Saturday',
-		'firstclasssignedforsmall'			=>	'Signed For: First Small Parcel',
-		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
-		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
-		'secondclassmediumparcelsignedfor'	=>	'Signed For: Second Class Medium Parcel',
-
 	);
-	public $supported_international_services = array(
-		'internationalstandardsmallparcel'			=>	'International Standard Small Parcel',
-		'internationalsmallparceltrackedsigned'		=>	'International Tracked and Signed Small Parcel',
-		'internationaltrackedsmallparcel'			=>	'International Tracked Small Parcel',
-		'internationalsignedsmallparcel'			=>	'International Signed Small Parcel',
-		'internationaleconomysmallparcel'			=>	'International Economy Small Parcel',
-	);
-	private $supported_parcelforce_services = array(
-		'parcelforceworldwideexpress9'				=>	'Parcelforce Worldwide: Express 9',
-		'parcelforceworldwideexpress10'				=>	'Parcelforce Worldwide: Express 10',
-		'parcelforceworldwideexpressAM'				=>	'Parcelforce Worldwide: Express AM',
-		'parcelforceworldwideexpress24'				=>	'Parcelforce Worldwide: Express 24',
-		'parcelforceworldwideexpress48'				=>	'Parcelforce Worldwide: Express 48',
-		'parcelforceworldwideexpress9saturday'		=>	'Parcelforce Worldwide: Express 9 Saturday',
-		'parcelforceworldwideexpress10saturday'		=>	'Parcelforce Worldwide: Express 10 Saturday',
-		'parcelforceworldwideexpressAMsaturday'		=>	'Parcelforce Worldwide: Express AM Saturday',
-		'parcelforceworldwideexpress24saturday'		=>	'Parcelforce Worldwide: Express 24 Saturday',
-		'parcelforceworldwideexpress48saturday'		=>	'Parcelforce Worldwide: Express 48 Saturday',	
-	);
-	private $supported_intl_letter_services = array(
-		'internationalstandardletter'				=>	'International Standard Letter',
-		'internationalstandardlargeletter'			=>	'International Standard Large Letter',
-		'internationallettertrackedsigned'			=>	'International Tracked and Signed Letter',
-		'internationallargelettertrackedandsigned'	=>	'International Tracked and Signed Large Letter',
-		'internationaltrackedletter'				=>	'International Tracked Letter',
-		'internationaltrackedlargeletter'			=>	'International Tracked Large Letter',
-		'internationalsignedlargeletter'			=>	'International Signed Large Letter',
-		'internationallettersigned'					=>	'International Signed Letter',
-		'internationaleconomyletter'				=>	'International Economy Letter',
-		'internationaleconomylargeletter'			=>	'International Economy Large Letter',
-	
-	);
-	private $supported_domestic_letter_services = array(
-		'firstclasslettersignedfor'			=>	'Signed For: First Class Letter',
-		'firstclasslargelettersignedfor'	=>	'Signed For: First Class Large Letter',
-		'letter'							=>	'Standard First Class Letter',
-		'largeletter'						=>	'Standard First Class Large Letter',
-		'secondclasslettersignedfor'		=>	'Signed For: Second Class Class Letter',
-		'secondclasslargelettersignedfor'	=>	'Signed For: Second Class Class Large Letter',
-		'secondclassletter'					=>	'Second Class: Letter',
-		'secondclasslargeletter'			=>	'Second Class: Large Letter',
-	);
-	private $domestical_max_weight = 22;
-	private $intel_max_weight = 20;
-	// since 1.6
-	private $only_letters = true;
-
-
 
 	public function __construct() {
 		$this->id = 'wpruby_royalmail';
@@ -188,7 +129,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
         	$allowedMethods = $this->getAllowedMethods($pack, $package['destination']['country']);
 	        if (empty($allowedMethods) == false) {
 
-
 	            // NEEDS INVESTIGATION
 	            $dataClass->setWeightUnit(strtolower(get_option('woocommerce_weight_unit')));
 	            $dataClass->_setWeight($pack['weight']);
@@ -198,7 +138,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                $pack['value'],
 	                $pack['weight']
 	            );
-
+				$this->debug('Calculated Methods: ', $calculatedMethods);
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
 	            if ($dataClass->_getWeight() <= 2) {
@@ -254,72 +194,8 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	 * @return void
 	 */
 	public function admin_options() {
-
-		?>
-		<h3><?php _e('Royal Mail Settings', 'wc-royal-mail');?></h3>
-			<?php $this->check_store_requirements(); ?>
-			<?php if ($this->debug_mode == 'yes'): ?>
-				<div class="updated woocommerce-message">
-			    	<p><?php _e('Royal Mail debug mode is activated, only administrators can use it.', 'wc-royal-mail');?></p>
-			    </div>
-			<?php endif;?>
-			<div id="poststuff">
-				<div id="post-body" class="metabox-holder columns-2">
-					<div id="post-body-content">
-						<table class="form-table">
-							<?php $this->generate_settings_html();?>
-						</table><!--/.form-table-->
-					</div>
-					<div id="postbox-container-1" class="postbox-container">
-	                        <div id="side-sortables" class="meta-box-sortables ui-sortable"> 
-	                            <div class="postbox ">
-	                                <div class="handlediv" title="Click to toggle"><br></div>
-	                                <h3 class="hndle"><span><i class="fa fa-question-circle"></i>&nbsp;&nbsp;Plugin Support</span></h3>
-	                                <div class="inside">
-	                                    <div class="support-widget">
-	                                        <p>
-	                                        <img style="width:100%;" src="https://wpruby.com/wp-content/uploads/2016/03/wpruby_logo_with_ruby_color-300x88.png">
-	                                        <br/>
-	                                        Got a Question, Idea, Problem or Praise?</p>
-	                                        <ul>
-	                                            <li>» <a href="https://wpruby.com/submit-ticket/" target="_blank">Support Request</a></li>
-	                                            <li>» <a href="https://wpruby.com/knowledgebase_category/woocommerce-royal-mail-shipping-method-pro/" target="_blank">Documentation and Common issues</a></li>
-	                                            <li>» <a href="https://wpruby.com/plugins/" target="_blank">Our Plugins Shop</a></li>
-	                                        </ul>
-
-	                                    </div>
-	                                </div>
-	                            </div>
-
-	                            <div class="postbox rss-postbox">
-	    							<div class="handlediv" title="Click to toggle"><br></div>
-	    								<h3 class="hndle"><span><i class="fa fa-wordpress"></i>&nbsp;&nbsp;WPRuby Blog</span></h3>
-	    								<div class="inside">
-											<div class="rss-widget">
-												<?php
-	    											wp_widget_rss_output(array(
-    													'url' => 'https://wpruby.com/feed/',
-    													'title' => 'WPRuby Blog',
-    													'items' => 3,
-    													'show_summary' => 0,
-    													'show_author' => 0,
-    													'show_date' => 1,
-	    											));
-	    										?>
-	    									</div>
-	    								</div>
-	    						</div>
-
-	                        </div>
-	                    </div>
-                    </div>
-				</div>
-				<div class="clear"></div>
-
-		<?php
-}
-
-
+		require_once plugin_dir_path(__FILE__).'includes/admin-options.php';
+	}
 
 	/**
 	 * get_min_dimension function.
@@ -524,10 +400,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	}
 
 	private function getAllowedMethods($pack, $country){
-			return $domestic_options;
+		$domestic_options = (($this->domestic_options == ''))?array():(((is_array($this->domestic_options)))?$this->domestic_options:array($this->domestic_options));
+		return $domestic_options;
 	}
 	private function getAllMethods(){
-		return array_merge($this->supported_services, $this->supported_international_services, $this->supported_parcelforce_services, $this->supported_intl_letter_services, $this->supported_domestic_letter_services);
+		return array_merge($this->supported_services);
 	}
 	/**
 	 * Output a message
@@ -564,7 +441,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	 */
 	private function display_error_message( $message ){
 		$url = esc_url( self_admin_url( 'admin.php?page=wc-settings&tab=general' ) );
-		$link = "<a href='$url'>" . esc_html( __( 'Click here to change.', 'wc-royal-mail' ) ) . '</a>';
+		$link = "<a href='$url'>" . esc_html( __( 'Click here to change the setting.', 'wc-royal-mail' ) ) . '</a>';
 		$message = esc_html( $message );
 
 		echo "<div class='error'><p>$message $link</p></div>";
