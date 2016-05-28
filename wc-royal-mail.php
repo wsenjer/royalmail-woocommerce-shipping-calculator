@@ -1,7 +1,7 @@
 <?php
 /* @wordpress-plugin
  * Plugin Name:       WooCommerce Royal Mail Shipping Calculator
- * Plugin URI:        https://wordpress.org/plugin/royalmail-woocommerce-shipping-calculator
+ * Plugin URI:        https://wpruby.com
  * Description:       WooCommerce Royal Mail Shipping Calculator
  * Version:           1.0.0
  * Author:            WPRuby
@@ -19,13 +19,12 @@
 if(!function_exists('royalmail_is_woocommerce_active')){
 	function royalmail_is_woocommerce_active(){
 		$active_plugins = (array) get_option( 'active_plugins', array() );
-
 		if ( is_multisite() )
 			$active_plugins = array_merge( $active_plugins, get_site_option( 'active_sitewide_plugins', array() ) );
-		
 		return in_array( 'woocommerce/woocommerce.php', $active_plugins ) || array_key_exists( 'woocommerce/woocommerce.php', $active_plugins );
 	}
 }
+
 // check if WooCommerce is installed
 if(royalmail_is_woocommerce_active()){
 
