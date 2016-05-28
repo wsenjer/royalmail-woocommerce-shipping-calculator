@@ -22,7 +22,6 @@
                                         <ul>
                                             <li>» UK Guaranteed</li>
                                             <li>» UK Confirmed</li>
-                                            <li>» UK Standard</li>
                                             <li>» UK Parcelforce Worldwide</li>
                                             <li>» International Shipping</li>
                                             <li>» Letters Shipping</li>
