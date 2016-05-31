@@ -112,6 +112,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$package_details =  $this->get_package_details($package);
 		
+		$this->debug('Settings: ', json_encode($this->settings));
 		$this->debug('Packing Details', $package_details);
 
 		$calculateMethodClass = new Meanbee_RoyalmailPHPLibrary_CalculateMethod();
@@ -138,6 +139,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                $pack['value'],
 	                $pack['weight']
 	            );
+
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
 	            if ($dataClass->_getWeight() <= 2) {
@@ -167,6 +169,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                foreach ($calculatedMethods as $methodItem) {
 	                    if(isset($allMethods[$allowedMethod])){
 		                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
+								$this->debug('Shipping Methods: ', $methodItem);
 		                    	
 	                        	$price = $methodItem->methodPrice;
 
@@ -189,6 +192,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	            }
 	        }
     	}
+    	uasort( $rates, array( $this, 'sort_rates' ) );
 		foreach($rates as $key => $rate){
 			$this->add_rate($rate);
 		}
@@ -278,7 +282,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$i = 0;
 		foreach ($products as $product) {
 			$max_weight = $max_weights['own_package'];
-
 			while ($product['quantity'] > 0) {
 				if (!isset($pack[$packs_count]['weight'])) {
 					$pack[$packs_count]['weight'] = 0;
@@ -453,6 +456,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$message = esc_html( $message );
 
 		echo "<div class='error'><p>$message $link</p></div>";
-	}	
+	}
 
+	/** sort rates based on cost **/	
+    public function sort_rates( $a, $b ) {
+		if ( $a['cost'] == $b['cost'] ) return 0;
+		return ( $a['cost'] < $b['cost'] ) ? -1 : 1;
+    }
 }
