@@ -124,7 +124,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
         	$calculateMethodClass->_csvCleanNameMethodGroup
    		);
         
-
+   		$rates = array();
         foreach($package_details as $pack){
         	$allowedMethods = $this->getAllowedMethods($pack, $package['destination']['country']);
 	        if (empty($allowedMethods) == false) {
@@ -138,7 +138,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                $pack['value'],
 	                $pack['weight']
 	            );
-				$this->debug('Calculated Methods: ', $calculatedMethods);
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
 	            if ($dataClass->_getWeight() <= 2) {
@@ -163,27 +162,36 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	            }
 	            $allMethods = $this->getAllMethods();
-	            $cheapest_rate = '';
 	            foreach ($allowedMethods as $allowedMethod) {
 	                
 	                foreach ($calculatedMethods as $methodItem) {
-	                    	
-	                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
-	                    	
-	                    	$rate = array();
-	                        $rate['id'] =  $methodItem->shippingMethodName;
-	                        $rate['label'] =  $this->title;
-	                        $rate['label'] .= ': '. $methodItem->shippingMethodNameClean;
-	             			$rate['cost'] = $methodItem->methodPrice;
-		                    $this->add_rate($rate);
-	                    
-	                    }
+	                    if(isset($allMethods[$allowedMethod])){
+		                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
+		                    	
+	                        	$price = $methodItem->methodPrice;
 
+								if(!isset($rates[$methodItem->shippingMethodName])){
+									$rates[$methodItem->shippingMethodName] = array();
+			                        $rates[$methodItem->shippingMethodName]['id'] =  $methodItem->shippingMethodName;
+			                        $rates[$methodItem->shippingMethodName]['label'] = $this->title;
+
+			                        $rates[$methodItem->shippingMethodName]['label'] .= ': '. $methodItem->shippingMethodNameClean;
+		             				$rates[$methodItem->shippingMethodName]['cost'] = $price;
+
+								}else{
+		             				$rates[$methodItem->shippingMethodName]['cost'] = $rates[$methodItem->shippingMethodName]['cost'] + $price;
+								}
+		                    
+		                    }
+	                	}
 	                }
 
 	            }
 	        }
     	}
+		foreach($rates as $key => $rate){
+			$this->add_rate($rate);
+		}
 	}
 
 	/**
