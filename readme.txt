@@ -14,6 +14,13 @@ WooCommerce Royal Mail Shipping Calculator is a Wordpress Plugin that integrate 
 == Description ==
 WooCommerce Royal Mail Shipping Calculator is a Wordpress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer. 
 	
+If you have any issues or questions, please open a thread in the WordPress.org forum or you can open a [support ticket](wpruby.com/submit-ticket/ "support ticket") on our website.
+
+== Screenshots ==
+
+1. Royal Mail Shipping Settings Page.
+2. Checkout Page Preview.
+
 
 
 == Installation ==
