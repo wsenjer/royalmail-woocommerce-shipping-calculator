@@ -1,7 +1,7 @@
 === WooCommerce Royal Mail Shipping Calculator ===
 Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
-Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail
+Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 3.5.1
 Tested up to: 4.5.2
 Stable tag: 1.0.0
