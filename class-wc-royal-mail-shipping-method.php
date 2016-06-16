@@ -14,14 +14,18 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
 	);
 
-	public function __construct() {
+	public function __construct($instance_id = 0) {
 		$this->id = 'wpruby_royalmail';
 		$this->method_title = __('Royal Mail', 'wc-royal-mail');
 		$this->title = __('Royal Mail', 'wc-royal-mail');
-
+		$this->instance_id = absint( $instance_id );
 		$this->init_form_fields();
 		$this->init_settings();
-
+		$this->supports  = array(
+ 			'shipping-zones',
+ 			'instance-settings',
+ 			'instance-settings-modal',
+ 		);
 		$this->tax_status = 'taxable';
 
 		$this->enabled = $this->get_option('enabled');
@@ -48,14 +52,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$dimensions_unit = strtolower(get_option('woocommerce_dimension_unit'));
 		$weight_unit = strtolower(get_option('woocommerce_weight_unit'));
 
-		$this->form_fields = array(
-
-			'enabled' => array(
-				'title' => __('Enable/Disable', 'wc-royal-mail'),
-				'type' => 'checkbox',
-				'label' => __('Enable Royal Mail', 'wc-royal-mail'),
-				'default' => 'no',
-			),
+		$this->instance_form_fields = array(
 			'title' => array(
 				'title' => __('Method Title', 'wc-royal-mail'),
 				'type' => 'text',
@@ -79,6 +76,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			),
 			'default_size' => array(
 				'type' => 'default_size',
+				'default' => '',
 			),
 			'parcel_size' => array(
 				'title' => __('First / Second Class Parcel Size', 'wc-royal-mail'),
@@ -96,13 +94,14 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'default' 	=> 'firstclasssmall',
 				'class' 	=> 'availability wc-enhanced-select',
 				'css' 		=> 'width:80%;',
+				'default'	=> '',
 				'options' 	=> $this->supported_services,
 			),	
 		);
 
 	}
 
-	public function calculate_shipping($package) {
+	public function calculate_shipping( $package = array() ) {
 		if($package['destination']['country'] != 'GB'){
 			return;
 		}
@@ -194,6 +193,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
     	}
     	uasort( $rates, array( $this, 'sort_rates' ) );
 		foreach($rates as $key => $rate){
+			$rate['package'] = $package;
 			$this->add_rate($rate);
 		}
 	}

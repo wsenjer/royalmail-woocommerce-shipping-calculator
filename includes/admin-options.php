@@ -9,7 +9,7 @@
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
 				<table class="form-table">
-					<?php $this->generate_settings_html();?>
+					<?php echo $this->get_admin_options_html();?>
 				</table><!--/.form-table-->
 			</div>
 			<div id="postbox-container-1" class="postbox-container">

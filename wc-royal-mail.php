@@ -33,7 +33,7 @@ if(royalmail_is_woocommerce_active()){
 	 * */
 	add_filter('woocommerce_shipping_methods', 'wpruby_add_royal_mail_method');
 	function wpruby_add_royal_mail_method( $methods ){
-		$methods[] = 'WC_Royal_Mail_Shipping_Method';
+		$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method';
 		return $methods; 
 	}
 	/**
