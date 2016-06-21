@@ -26,10 +26,13 @@
                                 <div class="inside">
                                     <div class="support-widget">
                                         <ul>
-                                            <li>» UK Guaranteed</li>
-                                            <li>» UK Confirmed</li>
+                                            <li>» UK Parcelforce</li>
                                             <li>» UK Parcelforce Worldwide</li>
-                                            <li>» International Shipping</li>
+                                            <li>» International Standard</li>
+                                            <li>» International Economy</li>
+                                            <li>» International Tracked</li>
+                                            <li>» International Signed</li>
+                                            <li>» International Tracked & Signed</li>
                                             <li>» Letters Shipping</li>
                                             <li>» Customizable Domestic Shipping</li>
                                             <li>» Handling Fees and Discounts</li>
