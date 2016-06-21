@@ -33,7 +33,11 @@ if(royalmail_is_woocommerce_active()){
 	 * */
 	add_filter('woocommerce_shipping_methods', 'wpruby_add_royal_mail_method');
 	function wpruby_add_royal_mail_method( $methods ){
-		$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method';
+		if(version_compare(WC()->version, '2.6.0', 'lt')){
+ 			$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method_Legacy';
+ 		}else{
+ 			$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method';
+ 		}
 		return $methods; 
 	}
 	/**
@@ -42,6 +46,9 @@ if(royalmail_is_woocommerce_active()){
 	add_action('woocommerce_shipping_init', 'wpruby_init_royal_mail');
 	function wpruby_init_royal_mail(){
 		require 'class-wc-royal-mail-shipping-method.php';
+		if(version_compare(WC()->version, '2.6.0', 'lt')){
+ 			require 'class-wc-royal-mail-shipping-method-legacy.php';
+ 		}
 	}
 
 }// is woocommerce active

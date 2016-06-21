@@ -9,7 +9,13 @@
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
 				<table class="form-table">
-					<?php echo $this->get_admin_options_html();?>
+					<?php
+					if(version_compare(WC()->version, '2.6.0', 'lt')){
+						$this->generate_settings_html();
+					}else{
+						echo $this->get_admin_options_html();
+					}
+					?>
 				</table><!--/.form-table-->
 			</div>
 			<div id="postbox-container-1" class="postbox-container">

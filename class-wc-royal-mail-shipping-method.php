@@ -24,7 +24,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$this->supports  = array(
  			'shipping-zones',
  			'instance-settings',
- 			'instance-settings-modal',
  		);
 		$this->tax_status = 'taxable';
 
