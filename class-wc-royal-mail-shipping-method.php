@@ -367,9 +367,15 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	public function generate_default_size_html() {
 		$dimensions_unit = strtolower(get_option('woocommerce_dimension_unit'));
-		$length = (isset($this->default_size['length']))?$this->default_size['length']:'';
-		$width  = (isset($this->default_size['width']))?$this->default_size['width']:'';
-		$height = (isset($this->default_size['height']))?$this->default_size['height']:'';
+		if(version_compare(WC()->version, '2.6.0', 'lt')){
+			$length = (isset($this->default_size['length']))?$this->default_size['length']:'';
+			$width  = (isset($this->default_size['width']))?$this->default_size['width']:'';
+			$height  = (isset($this->default_size['height']))?$this->default_size['height']:'';
+		}else{
+			$length = (isset($this->instance_settings['default_size']['length']))?$this->instance_settings['default_size']['length']:'';
+			$width = (isset($this->instance_settings['default_size']['width']))?$this->instance_settings['default_size']['width']:'';
+			$height = (isset($this->instance_settings['default_size']['height']))?$this->instance_settings['default_size']['height']:'';
+		}
 		ob_start();
 		?>
 		<tr valign="top">
