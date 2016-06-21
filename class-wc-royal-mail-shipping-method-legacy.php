@@ -5,14 +5,8 @@
  * @since 1.0.0
  * 
  * */
-class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
+class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method{
 
-	private $supported_services = array(
-		'firstclasssmall'					=>	'Standard First Class Small Parcel',
-		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
-		'secondclasssmallparcel'			=>	'Second Class: Small Parcel',
-		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
-	);
 
 	public function __construct($instance_id = 0) {
 		parent::__construct(0);

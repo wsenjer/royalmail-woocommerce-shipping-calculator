@@ -7,11 +7,19 @@
  * */
 class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
-	private $supported_services = array(
+	public $supported_services = array(
 		'firstclasssmall'					=>	'Standard First Class Small Parcel',
 		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
 		'secondclasssmallparcel'			=>	'Second Class: Small Parcel',
 		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
+		'firstclasssignedforsmall'			=>	'Signed For: First Small Parcel',
+		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
+		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
+		'secondclassmediumparcelsignedfor'	=>	'Signed For: Second Class Medium Parcel',
+		'specialdelivery9am'				=>	'Special Delivery: Guaranteed by 9am',
+		'specialdelivery1pm'				=>	'Special Delivery: Guaranteed by 1pm',
+		'specialdelivery1pmsaturday'		=>	'Special Delivery: Guaranteed by 1pm Saturday',
+		'specialdelivery9amsaturday'		=>	'Special Delivery: Guaranteed by 9am Saturday',
 	);
 
 	public function __construct($instance_id = 0) {
@@ -440,10 +448,10 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	/**
 	 * check_store_requirements function.
 	 *
-	 * @access private
+	 * @access public
 	 * @return void
 	 */
-	private function check_store_requirements() {
+	public function check_store_requirements() {
 		if ( get_woocommerce_currency() != "GBP" ) {
 			$this->display_error_message( __( 'In order to the Royal Mail extension to work, the store currency must be British Pounds.', 'wc-royal-mail' ) );
 		}
