@@ -3,8 +3,8 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 3.5.1
-Tested up to: 4.5.2
-Stable tag: 1.2.0
+Tested up to: 4.7.3
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,9 @@ If you have any issues or questions, please open a thread in the WordPress.org f
 
 
 == Changelog ==
+
+= 1.2.1 09/3/2017 =
+* FIXED: Compatibility with Kite Print and Dropshipping on Demand plugin
 
 = 1.2.0 21/6/2016 =
 * ADDED: Compatibility with WooCommerce less than 2.6.0
