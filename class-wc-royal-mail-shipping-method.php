@@ -88,7 +88,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			'parcel_size' => array(
 				'title' => __('First / Second Class Parcel Size', 'wc-royal-mail'),
 				'type' => 'select',
-				'default' => 'all',
+				'default' => 'small',
 				'description' => __('Select the parcel size you\'d like to use for calculating the price of First and Second class parcels. If you select "Small", then the "Small Parcel" price will be used up until 2kg. After 2kg the medium parcel price will always be used.', 'wc-royal-mail'),
 				'options' => array(
 					'small' => __('Small Parcel (up to 2kg)', 'wc-royal-mail'),
@@ -142,20 +142,18 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	            $calculatedMethods = $calculateMethodClass->getMethods(
 	            	$package['destination']['country'],
-	                $pack['value'],
+	                '1',
 	                $pack['weight']
 	            );
 
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
-	            if ($dataClass->_getWeight() <= 2) {
 	                if ($this->parcel_size == 'small' ||
 	                    $this->parcel_size == ""
 	                ) {
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'MEDIUM') {
 	                            unset($calculatedMethods[$key]);
-
 	                        }
 	                    }
 	                }
@@ -163,12 +161,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'SMALL') {
 	                            unset($calculatedMethods[$key]);
-
 	                        }
 	                    }
 	                }
 
-	            }
+
 	            $allMethods = $this->getAllMethods();
 	            foreach ($allowedMethods as $allowedMethod) {
 	                
@@ -344,27 +341,27 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$max_weights = array();
 
 		$max_weights['own_package'] = ($country == 'GB') ? 30 : 2;
-		$store_unit = strtolower(get_option('woocommerce_weight_unit'));
-		return array(
-			'own_package' => $max_weights['own_package'],
-		);
-		if ($store_unit == 'kg') {
-			return $max_weights;
-		}
+		if($country == 'GB'){
+			if($this->parcel_size == 'small'){
+				return array(
+					'own_package' => 2,
+				);
 
-		if ($store_unit == 'g') {
-			return array('own_package' => $max_weights['own_package'] * 1000);
+			}elseif($this->parcel_size == 'medium'){
+				return array(
+					'own_package' => 20,
+				);
+			}else{
+				return array(
+					'own_package' => $max_weights['own_package'],
+				);
+			}
+		}else{
+			return array(
+				'own_package' => $max_weights['own_package'],
+			);
 		}
-
-		if ($store_unit == 'lbs') {
-			return array('own_package' => $max_weights['own_package'] * 0.453592);
-		}
-
-		if ($store_unit == 'oz') {
-			return array('own_package' => $max_weights['own_package'] * 0.0283495);
-		}
-
-		return $max_weights;
+		
 	}
 
 
