@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 3.5.1
 Tested up to: 4.7.3
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,8 @@ If you have any issues or questions, please open a thread in the WordPress.org f
 
 
 == Changelog ==
+= 1.2.2 23/03/2017 =
+* FIXED: if Small Parcel is selected keep adding items to multiple small parcels
 
 = 1.2.1 09/3/2017 =
 * FIXED: Compatibility with Kite Print and Dropshipping on Demand plugin
