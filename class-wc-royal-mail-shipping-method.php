@@ -145,26 +145,29 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                '1',
 	                $pack['weight']
 	            );
-
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
-	                if ($this->parcel_size == 'small' ||
-	                    $this->parcel_size == ""
+	                if ($this->parcel_size == 'small' && $pack['weight'] <= 2
 	                ) {
+
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'MEDIUM') {
 	                            unset($calculatedMethods[$key]);
 	                        }
 	                    }
+	                }else{
+	                	$this->parcel_size = 'medium';
 	                }
+
 	                if ($this->parcel_size == 'medium') {
+
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'SMALL') {
 	                            unset($calculatedMethods[$key]);
 	                        }
 	                    }
 	                }
-
+				$this->debug('calculatedMethods', $calculatedMethods);
 
 	            $allMethods = $this->getAllMethods();
 	            foreach ($allowedMethods as $allowedMethod) {
@@ -271,7 +274,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 			$volume += ($length * $height * $width);
 		}
-		$max_weights = $this->royalmail_get_max_weight($package, $products);
+		$max_weights = $this->royalmail_get_max_weight($package, $products, $weight);
 		// @since 1.5 order the products by their postcodes
 		array_multisort($products, SORT_ASC, $products);
 
@@ -334,7 +337,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	
 
-	private function royalmail_get_max_weight($package, $products = array()) {
+	private function royalmail_get_max_weight($package, $products = array(), $total_weight) {
 		// @TODO
 		$country = $package['destination']['country'];
 
@@ -342,18 +345,13 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$max_weights['own_package'] = ($country == 'GB') ? 30 : 2;
 		if($country == 'GB'){
-			if($this->parcel_size == 'small'){
+			if($total_weight <= 2 && $this->parcel_size == 'small'){
 				return array(
 					'own_package' => 2,
 				);
-
-			}elseif($this->parcel_size == 'medium'){
-				return array(
-					'own_package' => 20,
-				);
 			}else{
 				return array(
-					'own_package' => $max_weights['own_package'],
+					'own_package' => 20,
 				);
 			}
 		}else{
