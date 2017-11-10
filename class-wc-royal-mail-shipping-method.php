@@ -7,21 +7,32 @@
  * */
 class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
-	private $supported_services = array(
+	public $supported_services = array(
 		'firstclasssmall'					=>	'Standard First Class Small Parcel',
 		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
 		'secondclasssmallparcel'			=>	'Second Class: Small Parcel',
 		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
+		'firstclasssignedforsmall'			=>	'Signed For: First Small Parcel',
+		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
+		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
+		'secondclassmediumparcelsignedfor'	=>	'Signed For: Second Class Medium Parcel',
+		'specialdelivery9am'				=>	'Special Delivery: Guaranteed by 9am',
+		'specialdelivery1pm'				=>	'Special Delivery: Guaranteed by 1pm',
+		'specialdelivery1pmsaturday'		=>	'Special Delivery: Guaranteed by 1pm Saturday',
+		'specialdelivery9amsaturday'		=>	'Special Delivery: Guaranteed by 9am Saturday',
 	);
 
-	public function __construct() {
+	public function __construct($instance_id = 0) {
 		$this->id = 'wpruby_royalmail';
 		$this->method_title = __('Royal Mail', 'wc-royal-mail');
 		$this->title = __('Royal Mail', 'wc-royal-mail');
-
+		$this->instance_id = absint( $instance_id );
 		$this->init_form_fields();
 		$this->init_settings();
-
+		$this->supports  = array(
+ 			'shipping-zones',
+ 			'instance-settings',
+ 		);
 		$this->tax_status = 'taxable';
 
 		$this->enabled = $this->get_option('enabled');
@@ -48,14 +59,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$dimensions_unit = strtolower(get_option('woocommerce_dimension_unit'));
 		$weight_unit = strtolower(get_option('woocommerce_weight_unit'));
 
-		$this->form_fields = array(
-
-			'enabled' => array(
-				'title' => __('Enable/Disable', 'wc-royal-mail'),
-				'type' => 'checkbox',
-				'label' => __('Enable Royal Mail', 'wc-royal-mail'),
-				'default' => 'no',
-			),
+		$this->instance_form_fields = array(
 			'title' => array(
 				'title' => __('Method Title', 'wc-royal-mail'),
 				'type' => 'text',
@@ -79,11 +83,12 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			),
 			'default_size' => array(
 				'type' => 'default_size',
+				'default' => '',
 			),
 			'parcel_size' => array(
 				'title' => __('First / Second Class Parcel Size', 'wc-royal-mail'),
 				'type' => 'select',
-				'default' => 'all',
+				'default' => 'small',
 				'description' => __('Select the parcel size you\'d like to use for calculating the price of First and Second class parcels. If you select "Small", then the "Small Parcel" price will be used up until 2kg. After 2kg the medium parcel price will always be used.', 'wc-royal-mail'),
 				'options' => array(
 					'small' => __('Small Parcel (up to 2kg)', 'wc-royal-mail'),
@@ -96,13 +101,14 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'default' 	=> 'firstclasssmall',
 				'class' 	=> 'availability wc-enhanced-select',
 				'css' 		=> 'width:80%;',
+				'default'	=> '',
 				'options' 	=> $this->supported_services,
 			),	
 		);
 
 	}
 
-	public function calculate_shipping($package) {
+	public function calculate_shipping( $package = array() ) {
 		if($package['destination']['country'] != 'GB'){
 			return;
 		}
@@ -112,6 +118,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$package_details =  $this->get_package_details($package);
 		
+		$this->debug('Settings: ', json_encode($this->settings));
 		$this->debug('Packing Details', $package_details);
 
 		$calculateMethodClass = new Meanbee_RoyalmailPHPLibrary_CalculateMethod();
@@ -124,7 +131,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
         	$calculateMethodClass->_csvCleanNameMethodGroup
    		);
         
-
+   		$rates = array();
         foreach($package_details as $pack){
         	$allowedMethods = $this->getAllowedMethods($pack, $package['destination']['country']);
 	        if (empty($allowedMethods) == false) {
@@ -135,55 +142,67 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	            $calculatedMethods = $calculateMethodClass->getMethods(
 	            	$package['destination']['country'],
-	                $pack['value'],
+	                '1',
 	                $pack['weight']
 	            );
-				$this->debug('Calculated Methods: ', $calculatedMethods);
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
-	            if ($dataClass->_getWeight() <= 2) {
-	                if ($this->parcel_size == 'small' ||
-	                    $this->parcel_size == ""
+	                if ($this->parcel_size == 'small' && $pack['weight'] <= 2
 	                ) {
+
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'MEDIUM') {
 	                            unset($calculatedMethods[$key]);
-
 	                        }
 	                    }
+	                }else{
+	                	$this->parcel_size = 'medium';
 	                }
+
 	                if ($this->parcel_size == 'medium') {
+
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'SMALL') {
 	                            unset($calculatedMethods[$key]);
-
 	                        }
 	                    }
 	                }
+				$this->debug('calculatedMethods', $calculatedMethods);
 
-	            }
 	            $allMethods = $this->getAllMethods();
-	            $cheapest_rate = '';
 	            foreach ($allowedMethods as $allowedMethod) {
 	                
 	                foreach ($calculatedMethods as $methodItem) {
-	                    	
-	                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
-	                    	
-	                    	$rate = array();
-	                        $rate['id'] =  $methodItem->shippingMethodName;
-	                        $rate['label'] =  $this->title;
-	                        $rate['label'] .= ': '. $methodItem->shippingMethodNameClean;
-	             			$rate['cost'] = $methodItem->methodPrice;
-		                    $this->add_rate($rate);
-	                    
-	                    }
+	                    if(isset($allMethods[$allowedMethod])){
+		                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
+								$this->debug('Shipping Methods: ', $methodItem);
+		                    	
+	                        	$price = $methodItem->methodPrice;
 
+								if(!isset($rates[$methodItem->shippingMethodName])){
+									$rates[$methodItem->shippingMethodName] = array();
+			                        $rates[$methodItem->shippingMethodName]['id'] =  $methodItem->shippingMethodName;
+			                        $rates[$methodItem->shippingMethodName]['label'] = $this->title;
+
+			                        $rates[$methodItem->shippingMethodName]['label'] .= ': '. $methodItem->shippingMethodNameClean;
+		             				$rates[$methodItem->shippingMethodName]['cost'] = $price;
+
+								}else{
+		             				$rates[$methodItem->shippingMethodName]['cost'] = $rates[$methodItem->shippingMethodName]['cost'] + $price;
+								}
+		                    
+		                    }
+	                	}
 	                }
 
 	            }
 	        }
     	}
+    	uasort( $rates, array( $this, 'sort_rates' ) );
+		foreach($rates as $key => $rate){
+			$rate['package'] = $package;
+			$this->add_rate($rate);
+		}
 	}
 
 	/**
@@ -255,7 +274,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 			$volume += ($length * $height * $width);
 		}
-		$max_weights = $this->royalmail_get_max_weight($package, $products);
+		$max_weights = $this->royalmail_get_max_weight($package, $products, $weight);
 		// @since 1.5 order the products by their postcodes
 		array_multisort($products, SORT_ASC, $products);
 
@@ -270,7 +289,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$i = 0;
 		foreach ($products as $product) {
 			$max_weight = $max_weights['own_package'];
-
 			while ($product['quantity'] > 0) {
 				if (!isset($pack[$packs_count]['weight'])) {
 					$pack[$packs_count]['weight'] = 0;
@@ -319,34 +337,29 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	
 
-	private function royalmail_get_max_weight($package, $products = array()) {
+	private function royalmail_get_max_weight($package, $products = array(), $total_weight) {
 		// @TODO
 		$country = $package['destination']['country'];
 
 		$max_weights = array();
 
 		$max_weights['own_package'] = ($country == 'GB') ? 30 : 2;
-		$store_unit = strtolower(get_option('woocommerce_weight_unit'));
-		return array(
-			'own_package' => $max_weights['own_package'],
-		);
-		if ($store_unit == 'kg') {
-			return $max_weights;
+		if($country == 'GB'){
+			if($total_weight <= 2 && $this->parcel_size == 'small'){
+				return array(
+					'own_package' => 2,
+				);
+			}else{
+				return array(
+					'own_package' => 20,
+				);
+			}
+		}else{
+			return array(
+				'own_package' => $max_weights['own_package'],
+			);
 		}
-
-		if ($store_unit == 'g') {
-			return array('own_package' => $max_weights['own_package'] * 1000);
-		}
-
-		if ($store_unit == 'lbs') {
-			return array('own_package' => $max_weights['own_package'] * 0.453592);
-		}
-
-		if ($store_unit == 'oz') {
-			return array('own_package' => $max_weights['own_package'] * 0.0283495);
-		}
-
-		return $max_weights;
+		
 	}
 
 
@@ -357,9 +370,15 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	public function generate_default_size_html() {
 		$dimensions_unit = strtolower(get_option('woocommerce_dimension_unit'));
-		$length = (isset($this->default_size['length']))?$this->default_size['length']:'';
-		$width  = (isset($this->default_size['width']))?$this->default_size['width']:'';
-		$height = (isset($this->default_size['height']))?$this->default_size['height']:'';
+		if(version_compare(WC()->version, '2.6.0', 'lt')){
+			$length = (isset($this->default_size['length']))?$this->default_size['length']:'';
+			$width  = (isset($this->default_size['width']))?$this->default_size['width']:'';
+			$height  = (isset($this->default_size['height']))?$this->default_size['height']:'';
+		}else{
+			$length = (isset($this->instance_settings['default_size']['length']))?$this->instance_settings['default_size']['length']:'';
+			$width = (isset($this->instance_settings['default_size']['width']))?$this->instance_settings['default_size']['width']:'';
+			$height = (isset($this->instance_settings['default_size']['height']))?$this->instance_settings['default_size']['height']:'';
+		}
 		ob_start();
 		?>
 		<tr valign="top">
@@ -424,10 +443,10 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	/**
 	 * check_store_requirements function.
 	 *
-	 * @access private
+	 * @access public
 	 * @return void
 	 */
-	private function check_store_requirements() {
+	public function check_store_requirements() {
 		if ( get_woocommerce_currency() != "GBP" ) {
 			$this->display_error_message( __( 'In order to the Royal Mail extension to work, the store currency must be British Pounds.', 'wc-royal-mail' ) );
 		}
@@ -445,6 +464,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$message = esc_html( $message );
 
 		echo "<div class='error'><p>$message $link</p></div>";
-	}	
+	}
 
+	/** sort rates based on cost **/	
+    public function sort_rates( $a, $b ) {
+		if ( $a['cost'] == $b['cost'] ) return 0;
+		return ( $a['cost'] < $b['cost'] ) ? -1 : 1;
+    }
 }

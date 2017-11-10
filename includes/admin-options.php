@@ -9,7 +9,13 @@
 		<div id="post-body" class="metabox-holder columns-2">
 			<div id="post-body-content">
 				<table class="form-table">
-					<?php $this->generate_settings_html();?>
+					<?php
+					if(version_compare(WC()->version, '2.6.0', 'lt')){
+						$this->generate_settings_html();
+					}else{
+						echo $this->get_admin_options_html();
+					}
+					?>
 				</table><!--/.form-table-->
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
@@ -20,10 +26,13 @@
                                 <div class="inside">
                                     <div class="support-widget">
                                         <ul>
-                                            <li>» UK Guaranteed</li>
-                                            <li>» UK Confirmed</li>
+                                            <li>» UK Parcelforce</li>
                                             <li>» UK Parcelforce Worldwide</li>
-                                            <li>» International Shipping</li>
+                                            <li>» International Standard</li>
+                                            <li>» International Economy</li>
+                                            <li>» International Tracked</li>
+                                            <li>» International Signed</li>
+                                            <li>» International Tracked & Signed</li>
                                             <li>» Letters Shipping</li>
                                             <li>» Customizable Domestic Shipping</li>
                                             <li>» Handling Fees and Discounts</li>
@@ -32,7 +41,7 @@
                                             <li>» Auto Hassle-Free Updates</li>
                                             <li>» High Priority Customer Support</li>
                                         </ul>
-										<a href="https://wpruby.com/plugin/woocommerce-royal-mail-shipping-method-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a> 
+										<a href="https://wpruby.com/plugin/woocommerce-royal-mail-shipping-calculator-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a> 
                                     </div>
                                 </div>
 	                        </div>
@@ -47,7 +56,7 @@
                                     Got a Question, Idea, Problem or Praise?</p>
                                     <ul>
                                         <li>» <a href="https://wpruby.com/submit-ticket/" target="_blank">Support Request</a></li>
-                                        <li>» <a href="https://wpruby.com/knowledgebase_category/woocommerce-royal-mail-shipping-method-pro/" target="_blank">Documentation and Common issues</a></li>
+                                        <li>» <a href="https://wpruby.com/knowledgebase_category/woocommerce-royal-mail-shipping-calculator-pro/" target="_blank">Documentation and Common issues</a></li>
                                         <li>» <a href="https://wpruby.com/plugins/" target="_blank">Our Plugins Shop</a></li>
                                     </ul>
 
@@ -91,3 +100,4 @@
 		font-size:12pt !important;
 	}
 </style>
+
