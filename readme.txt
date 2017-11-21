@@ -19,28 +19,28 @@ If you have any issues or questions, please open a thread in the WordPress.org f
 
 
 
-## Plugin’s features
+== Plugin’s features ==
 
-### Domestic Parcel Shipping
+#### Domestic Parcel Shipping
 
 Four types of domestic shipping options are supported. You can anytime, disable/enable one or all of these options.
 
-* Standard First Class Small Parcel
+`* Standard First Class Small Parcel
 * Standard First Class Medium Parcel
 * Second Class: Small Parcel
-* Second Class: Medium Parcel
+* Second Class: Medium Parcel`
 
-### Default Size and Weight
+#### Default Size and Weight
 In case you don’t want to add weight and dimensions for all of the products you have or even you missed adding this information to one of them. The plugin allows you to set a default weight and dimensions of your product in case of the product’s information are missing.
-Debug Mode
+#### Debug Mode
 The debug mode is an excellent tool to test out the plugin’s settings and shipping prices as the plugin will be only activated for you. Also, it will display debugging information at the checkout page if the Debug Mode is enabled.
 
-## Pro features
+== Pro features ==
 
-### Domestic Parcel Shipping
+#### Domestic Parcel Shipping
 All of domestic shipping options are supported. You can anytime, disable/enable one or all of these options.
 
-* Standard First Class Small Parcel
+`* Standard First Class Small Parcel
 * Standard First Class Medium Parcel
 * Second Class: Small Parcel
 * Second Class: Medium Parcel
@@ -51,23 +51,23 @@ All of domestic shipping options are supported. You can anytime, disable/enable 
 * Special Delivery: Guaranteed by 9am
 * Special Delivery: Guaranteed by 1pm
 * Special Delivery: Guaranteed by 1pm Saturday
-* Special Delivery: Guaranteed by 9am Saturday
+* Special Delivery: Guaranteed by 9am Saturday`
 
-### International Shipping
+#### International Shipping
 A wide range of international shipping options are supported:
 
-* International Standard Small Parcel
+`* International Standard Small Parcel
 * International Economy Small Parcel
 * International Tracked and Signed Small Parcel
 * International Tracked Small Parcel
-* International Signed Small Parcel
+* International Signed Small Parcel`
 
 
-### Parcelforce Shipping
+#### Parcelforce Shipping
 
 Do you need to ship parcels internationally with the Express service of ParcelForce? No worries. Our plugin supports most of the ParcelForce options:
 
-* Parcelforce Worldwide: Express 9
+`* Parcelforce Worldwide: Express 9
 * Parcelforce Worldwide: Express 10
 * Parcelforce Worldwide: Express AM
 * Parcelforce Worldwide: Express 24
@@ -80,9 +80,9 @@ Do you need to ship parcels internationally with the Express service of ParcelFo
 * Parcelforce Worldwide: Global Economy
 * Parcelforce Worldwide: Global Value
 * Parcelforce Worldwide: Global Priority
-* Parcelforce Worldwide: Global Express
+* Parcelforce Worldwide: Global Express`
 
-### Letters Shipping
+#### Letters Shipping
 If you sell small-sized items, you can always enable the letters option to save your customers high shipping prices and increase sales. Supported letters options:
 
 * **Domestic Letters Options**
@@ -108,9 +108,9 @@ If you sell small-sized items, you can always enable the letters option to save 
   * International Signed Large Letter
   * International Signed Letter
 
-### Handling Fees and Discounts
+#### Handling Fees and Discounts
 If either you need to add a handling fees for your shipping order, or if you want to reduce the shipping costs for your customers. We set an option for that where you can add an amount value to reduce or increase the shipping cost. The value can be either a number or a percentage, positive for handling fees and negative for discounts.
-### Display the Cheapest options
+#### Display the Cheapest options
 Cut to the Chase and provide the cheapest option to your customers without putting them in the hustle of choosing from many options.
 
 
