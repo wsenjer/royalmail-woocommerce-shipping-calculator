@@ -47,8 +47,6 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	
 
-		$this->availability = $this->get_option('availability');
-		$this->countries = $this->get_option('countries');
 		$this->debug_mode = $this->get_option('debug_mode');
 
 		add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
@@ -237,7 +235,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	 *
 	 * @access private
 	 * @param mixed $package
-	 * @return void
+	 * @return array
 	 */
 	private function get_package_details($package) {
 		global $woocommerce;
@@ -254,15 +252,17 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$products = array();
 		// Get weight of order
 		foreach ($package['contents'] as $item_id => $values) {
-			$final_weight = wc_get_weight((floatval($values['data']->get_weight()) <= 0) ? $this->default_weight : $values['data']->get_weight(), 'kg');
+		    /** @var WC_Product $_product */
+		    $_product = $values['data'];
+			$final_weight = wc_get_weight((floatval($_product->get_weight()) <= 0) ? $this->default_weight : $_product->get_weight(), 'kg');
 			$weight += $final_weight * $values['quantity'];
-			$value = $values['data']->get_price();
+			$value = $_product->get_price();
 
-			$length = woocommerce_get_dimension((floatval($values['data']->length) <= 0) ? $default_length : $values['data']->length, 'cm');
-			$height = woocommerce_get_dimension((floatval($values['data']->height) <= 0) ? $default_height : $values['data']->height, 'cm');
-			$width = woocommerce_get_dimension((floatval($values['data']->width) <= 0) ? $default_width : $values['data']->width, 'cm');
+			$length = wc_get_dimension((floatval($_product->get_length()) <= 0) ? $default_length : $_product->get_length(), 'cm');
+			$height = wc_get_dimension((floatval($_product->get_height()) <= 0) ? $default_height : $_product->get_height(), 'cm');
+			$width = wc_get_dimension((floatval($_product->get_weight()) <= 0) ? $default_width : $_product->get_width(), 'cm');
 			$min_dimension = self::get_min_dimension($width, $length, $height);
-			$products[] = array('weight' => wc_get_weight((floatval($values['data']->get_weight()) <= 0) ? $this->default_weight : $values['data']->get_weight(), 'kg'),
+			$products[] = array('weight' => wc_get_weight((floatval($_product->get_weight()) <= 0) ? $this->default_weight : $_product->get_weight(), 'kg'),
 				'quantity' => $values['quantity'],
 				'length' => $length,
 				'height' => $height,
@@ -404,7 +404,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	 *
 	 * @access public
 	 * @param mixed $key
-	 * @return void
+	 * @return array
 	 */
 	public function validate_default_size_field($key) {
 		$dimensions = array();
