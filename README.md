@@ -1,1 +1,1 @@
-# WooCommerce Royal Mail Shipping Method Pro
+# WooCommerce Royal Mail Shipping Method 
