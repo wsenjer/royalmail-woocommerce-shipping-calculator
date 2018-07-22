@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 3.5.1
 Tested up to: 4.9
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -156,6 +156,8 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.3.1 22/07/2018 =
+* FIXED: Dimensions calulations PHP warning
 
 = 1.3.0 30/03/2018 =
 * ADDED: update the shipping prices for Royal Mail 2018 standards
