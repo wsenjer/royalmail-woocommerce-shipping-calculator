@@ -116,7 +116,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$package_details =  $this->get_package_details($package);
 		
-		$this->debug('Settings: ', json_encode($this->settings));
+		$this->debug('Settings: ', json_encode($this->instance_settings));
 		$this->debug('Packing Details', $package_details);
 
 		$calculateMethodClass = new Meanbee_RoyalmailPHPLibrary_CalculateMethod();
@@ -258,9 +258,9 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			$weight += $final_weight * $values['quantity'];
 			$value = $_product->get_price();
 
-			$length = wc_get_dimension((floatval($_product->get_length()) <= 0) ? $default_length : $_product->get_length(), 'cm');
-			$height = wc_get_dimension((floatval($_product->get_height()) <= 0) ? $default_height : $_product->get_height(), 'cm');
-			$width = wc_get_dimension((floatval($_product->get_weight()) <= 0) ? $default_width : $_product->get_width(), 'cm');
+			$length = floatval(wc_get_dimension((floatval($_product->get_length()) <= 0) ? $default_length : $_product->get_length(), 'cm'));
+			$height = floatval(wc_get_dimension((floatval($_product->get_height()) <= 0) ? $default_height : $_product->get_height(), 'cm'));
+			$width =  floatval(wc_get_dimension((floatval($_product->get_weight()) <= 0) ? $default_width : $_product->get_width(), 'cm'));
 			$min_dimension = self::get_min_dimension($width, $length, $height);
 			$products[] = array('weight' => wc_get_weight((floatval($_product->get_weight()) <= 0) ? $this->default_weight : $_product->get_weight(), 'kg'),
 				'quantity' => $values['quantity'],
@@ -287,6 +287,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$pack[$packs_count]['quantity'] = 0;
 		$pack[$packs_count]['value'] = 0;
 		$i = 0;
+
 		foreach ($products as $product) {
 			$max_weight = $max_weights['own_package'];
 			while ($product['quantity'] > 0) {
@@ -297,9 +298,9 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 					$pack[$packs_count]['quantity'] = 0;
 				}
 				$pack[$packs_count]['weight'] += $product['weight'];
-				$pack[$packs_count]['length'] = ('length' == $product['min_dimension']) ? $pack[$packs_count]['length'] + $product['length'] : $product['length'];
-				$pack[$packs_count]['height'] = ('height' == $product['min_dimension']) ? $pack[$packs_count]['height'] + $product['height'] : $product['height'];
-				$pack[$packs_count]['width'] = ('width' == $product['min_dimension']) ? $pack[$packs_count]['width'] + $product['width'] : $product['width'];
+				$pack[$packs_count]['length'] = ('length' == $product['min_dimension']) ? $pack[$packs_count]['length'] + floatval($product['length']) : $product['length'];
+				$pack[$packs_count]['height'] = ('height' == $product['min_dimension']) ? $pack[$packs_count]['height'] + floatval($product['height']) : $product['height'];
+				$pack[$packs_count]['width'] = ('width' == $product['min_dimension']) ? $pack[$packs_count]['width'] + floatval($product['width']) : $product['width'];
 				$pack[$packs_count]['item_id'] = $product['item_id'];
 				$pack[$packs_count]['quantity'] += 1;
 				$pack[$packs_count]['value'] += round($product['value'], 2);
