@@ -157,7 +157,7 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 == Changelog ==
 = 1.3.1 22/07/2018 =
-* FIXED: Dimensions calulations PHP warning
+* FIXED: Dimensions calculations PHP warning
 
 = 1.3.0 30/03/2018 =
 * ADDED: update the shipping prices for Royal Mail 2018 standards
