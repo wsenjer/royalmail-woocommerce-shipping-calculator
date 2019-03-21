@@ -86,7 +86,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			'parcel_size' => array(
 				'title' => __('First / Second Class Parcel Size', 'wc-royal-mail'),
 				'type' => 'select',
-				'default' => 'small',
+				'default' => 'medium',
 				'description' => __('Select the parcel size you\'d like to use for calculating the price of First and Second class parcels. If you select "Small", then the "Small Parcel" price will be used up until 2kg. After 2kg the medium parcel price will always be used.', 'wc-royal-mail'),
 				'options' => array(
 					'small' => __('Small Parcel (up to 2kg)', 'wc-royal-mail'),
@@ -96,10 +96,9 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			'domestic_options' => array(
 				'title' 	=> __('Domestic Parcel Options', 'wc-royal-mail'),
 				'type' 		=> 'multiselect',
-				'default' 	=> 'firstclasssmall',
+				'default' 	=> array_keys($this->supported_services),
 				'class' 	=> 'availability wc-enhanced-select',
 				'css' 		=> 'width:80%;',
-				'default'	=> '',
 				'options' 	=> $this->supported_services,
 			),	
 		);
