@@ -3,7 +3,7 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 3.5.1
-Tested up to: 4.9
+Tested up to: 5.1
 Stable tag: 1.3.2
 Requires PHP: 5.2
 License: GPLv2 or later
