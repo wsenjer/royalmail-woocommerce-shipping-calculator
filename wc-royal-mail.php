@@ -3,9 +3,9 @@
  * Plugin Name:       WooCommerce Royal Mail Shipping Calculator
  * Plugin URI:        https://wpruby.com
  * Description:       WooCommerce Royal Mail Shipping Calculator
- * Version:           1.4.1
- * WC requires at least: 2.6
- * WC tested up to: 3.5
+ * Version:           1.5.0
+ * WC requires at least: 3.0
+ * WC tested up to: 4.0
  * Author:            WPRuby
  * Author URI:        https://wpruby.com
  * Text Domain:       wc-royal-mail
