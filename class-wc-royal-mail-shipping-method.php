@@ -54,9 +54,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	public function init_form_fields() {
 
-		$dimensions_unit = strtolower(get_option('woocommerce_dimension_unit'));
 		$weight_unit = strtolower(get_option('woocommerce_weight_unit'));
-
 		$this->instance_form_fields = array(
 			'title' => array(
 				'title' => __('Method Title', 'wc-royal-mail'),
@@ -237,17 +235,13 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	 * @return array
 	 */
 	private function get_package_details($package) {
-		global $woocommerce;
 
 		$default_length = (isset($this->default_size['length']))?$this->default_size['length']:1;
 		$default_width = (isset($this->default_size['width']))?$this->default_size['width']:1;
 		$default_height = (isset($this->default_size['height']))?$this->default_size['height']:1;
 
-		$parcel = array();
-		$requests = array();
 		$weight = 0;
 		$volume = 0;
-		$value = 0;
 		$products = array();
 		// Get weight of order
 		foreach ($package['contents'] as $item_id => $values) {
@@ -381,7 +375,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		}
 		ob_start();
 		?>
-		<tr valign="top">
+		<tr valign="top" id="wc_royalmail_default_size">
 			<th scope="row" class="titledesc">
 				<label for="woocommerce_wpruby_royalmail_debug_mode"><?php _e('Default Package Size', 'wc-royal-mail') ?></label>
 							</th>

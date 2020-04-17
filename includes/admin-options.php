@@ -98,6 +98,10 @@
 		text-align:center;
 		height:35px !important;
 		font-size:12pt !important;
+        line-height: 24px !important;
 	}
+    #wc_royalmail_default_size label{
+        margin-top: 11px !important;
+    }
 </style>
 
