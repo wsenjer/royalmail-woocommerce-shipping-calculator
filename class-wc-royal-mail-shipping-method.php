@@ -142,8 +142,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	            );
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
-	                if ($this->parcel_size == 'small' && $pack['weight'] <= 2
-	                ) {
+	                if ($this->parcel_size == 'small' && $this->is_small_parcel($pack) ) {
 
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'MEDIUM') {
@@ -154,7 +153,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	                	$this->parcel_size = 'medium';
 	                }
 
-	                if ($this->parcel_size == 'medium') {
+	                if ($this->parcel_size == 'medium' && $this->is_medium_parcel($pack)) {
 
 	                    foreach ($calculatedMethods as $key => $value) {
 	                        if ($value->size == 'SMALL') {
@@ -465,4 +464,50 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		if ( $a['cost'] == $b['cost'] ) return 0;
 		return ( $a['cost'] < $b['cost'] ) ? -1 : 1;
     }
+
+	private function is_small_parcel($dimensions){
+
+		if ($dimensions['weight'] > 2){
+			return false;
+		}
+
+		if ($dimensions['length'] > 60){
+			return false;
+		}
+
+		if($dimensions['width'] > 60){
+			return false;
+		}
+
+		if($dimensions['width'] > 60){
+			return false;
+		}
+
+		$total_dimensions = $dimensions['length'] + $dimensions['width'] + $dimensions['height'];
+		if ($total_dimensions > 90){
+			return false;
+		}
+
+		return true;
+	}
+
+	private function is_medium_parcel($dimensions){
+		if($dimensions['weight'] > 20){
+			return false;
+		}
+
+		if($dimensions['length'] > 61){
+			return false;
+		}
+
+		if($dimensions['width'] > 46){
+			return false;
+		}
+
+		if($dimensions['height'] > 46){
+			return false;
+		}
+
+		return true;
+	}
 }
