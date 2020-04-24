@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 4.0
 Tested up to: 5.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 Requires PHP: 5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -156,6 +156,10 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+
+= 1.5.2 25/04/2020 =
+* FIXED: filter small & medium options if the package is large
+
 = 1.5.1 25/04/2020 =
 * FIXED: Signed For option were not calculated correctly.
 * FIXED: Add dimensions to calculate small & medium parcels.
