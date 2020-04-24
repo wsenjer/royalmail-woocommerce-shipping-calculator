@@ -142,25 +142,20 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	            );
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
-	                if ($this->parcel_size == 'small' && $this->is_small_parcel($pack) ) {
+                if ($this->parcel_size == 'small' && $this->is_small_parcel($pack) ) {
+                    $calculatedMethods = $this->filter_methods_by_size($calculatedMethods, 'MEDIUM');
+                }else{
+                    $this->parcel_size = 'medium';
+                }
 
-	                    foreach ($calculatedMethods as $key => $value) {
-	                        if ($value->size == 'MEDIUM') {
-	                            unset($calculatedMethods[$key]);
-	                        }
-	                    }
-	                }else{
-	                	$this->parcel_size = 'medium';
-	                }
+                if ($this->parcel_size == 'medium' && $this->is_medium_parcel($pack)) {
+                    $calculatedMethods = $this->filter_methods_by_size($calculatedMethods, 'SMALL');
+                }
 
-	                if ($this->parcel_size == 'medium' && $this->is_medium_parcel($pack)) {
-
-	                    foreach ($calculatedMethods as $key => $value) {
-	                        if ($value->size == 'SMALL') {
-	                            unset($calculatedMethods[$key]);
-	                        }
-	                    }
-	                }
+		        if (!$this->is_medium_parcel($pack) && !$this->is_small_parcel($pack)) {
+			        $calculatedMethods = $this->filter_methods_by_size($calculatedMethods, 'SMALL');
+			        $calculatedMethods = $this->filter_methods_by_size($calculatedMethods, 'MEDIUM');
+		        }
 				$this->debug('calculatedMethods', $calculatedMethods);
 
 	            $allMethods = $this->getAllMethods();
@@ -509,5 +504,14 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		}
 
 		return true;
+	}
+
+	private function filter_methods_by_size($methods, $size){
+		foreach ($methods as $key => $value) {
+			if ($value->size === $size) {
+				unset($methods[$key]);
+			}
+		}
+		return $methods;
 	}
 }
