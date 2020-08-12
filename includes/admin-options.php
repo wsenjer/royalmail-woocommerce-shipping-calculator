@@ -21,9 +21,10 @@
 			<div id="postbox-container-1" class="postbox-container">
                     <div id="side-sortables" class="meta-box-sortables ui-sortable"> 
                         <div class="postbox ">
-                                <div class="handlediv" title="Click to toggle"><br></div>
+
                                 <h3 class="hndle"><span><i class="dashicons dashicons-update"></i>&nbsp;&nbsp;Upgrade to Pro</span></h3>
-                                <div class="inside">
+                            <hr>
+                            <div class="inside">
                                     <div class="support-widget">
                                         <ul>
                                             <li>» UK Parcelforce</li>
@@ -46,8 +47,8 @@
                                 </div>
 	                        </div>
                         <div class="postbox ">
-                            <div class="handlediv" title="Click to toggle"><br></div>
                             <h3 class="hndle"><span><i class="fa fa-question-circle"></i>&nbsp;&nbsp;Plugin Support</span></h3>
+                            <hr>
                             <div class="inside">
                                 <div class="support-widget">
                                     <p>
@@ -65,9 +66,9 @@
                         </div>
 
                         <div class="postbox rss-postbox">
-							<div class="handlediv" title="Click to toggle"><br></div>
 								<h3 class="hndle"><span><i class="fa fa-wordpress"></i>&nbsp;&nbsp;WPRuby Blog</span></h3>
-								<div class="inside">
+                            <hr>
+                            <div class="inside">
 									<div class="rss-widget">
 										<?php
 											wp_widget_rss_output(array(
