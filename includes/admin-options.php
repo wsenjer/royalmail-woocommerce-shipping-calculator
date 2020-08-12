@@ -66,7 +66,7 @@
                         </div>
 
                         <div class="postbox rss-postbox">
-								<h3 class="hndle"><span><i class="fa fa-wordpress"></i>&nbsp;&nbsp;WPRuby Blog</span></h3>
+							<h3 class="hndle"><span><i class="fa fa-wordpress"></i>&nbsp;&nbsp;WPRuby Blog</span></h3>
                             <hr>
                             <div class="inside">
 									<div class="rss-widget">

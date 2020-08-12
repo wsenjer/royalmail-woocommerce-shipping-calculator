@@ -3,9 +3,9 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 4.0
-Tested up to: 5.4
-Stable tag: 1.5.2
-Requires PHP: 5.2
+Tested up to: 5.5
+Stable tag: 1.5.3
+Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -156,6 +156,8 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.5.3 12.08.2020 =
+* FIXED: The setting page widgets header after WP 5.5 release.
 
 = 1.5.2 25/04/2020 =
 * FIXED: filter small & medium options if the package is large
