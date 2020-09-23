@@ -45,9 +45,8 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$this->domestic_options = $this->get_option('domestic_options');
 
-	
-
 		$this->debug_mode = $this->get_option('debug_mode');
+		$this->with_insurance = $this->get_option('with_insurance');
 
 		add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
 	}
@@ -98,7 +97,14 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'class' 	=> 'availability wc-enhanced-select',
 				'css' 		=> 'width:80%;',
 				'options' 	=> $this->supported_services,
-			),	
+			),
+			'with_insurance' => array(
+				'title' => __('Consider Insurance', 'wc-royal-mail'),
+				'type' => 'checkbox',
+				'label' => __('Enable ', 'wc-royal-mail'),
+				'default' => 'no',
+				'description' => __('If enabled, the plugin will consider, the amount of the package as a compensation amount, some services might be unavailable if the items in the package has a high price',  'wc-royal-mail'),
+			),
 		);
 
 	}
@@ -135,9 +141,10 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	            $dataClass->setWeightUnit(strtolower(get_option('woocommerce_weight_unit')));
 	            $dataClass->_setWeight($pack['weight']);
 
+	            $value = ($this->with_insurance === 'yes') ? $pack['value']: 1;
 	            $calculatedMethods = $calculateMethodClass->getMethods(
 	            	$package['destination']['country'],
-	                '1',
+		            $value,
 	                $pack['weight']
 	            );
 	            // Config check to remove small or medium parcel size based on the
