@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 5.0
 Tested up to: 5.6
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -156,6 +156,9 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.6.2 19.02.2021 =
+* ADDED: 2021 Royal Mail Prices.
+
 = 1.6.1 31.12.2020 =
 * ADDED: 2021 Royal Mail Prices.
 
