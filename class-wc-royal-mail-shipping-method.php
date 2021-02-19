@@ -268,7 +268,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 			$volume += ($length * $height * $width);
 		}
-		$max_weights = $this->royalmail_get_max_weight($package, $products, $weight);
+		$max_weights = $this->get_max_weight($package, $weight);
 		// @since 1.5 order the products by their postcodes
 		array_multisort($products, SORT_ASC, $products);
 
@@ -332,7 +332,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	
 
-	private function royalmail_get_max_weight($package, $products = array(), $total_weight) {
+	private function get_max_weight($package, $total_weight) {
 		// @TODO
 		$country = $package['destination']['country'];
 
@@ -469,24 +469,20 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	private function is_small_parcel($dimensions){
 
+        print_r($dimensions);
 		if ($dimensions['weight'] > 2){
 			return false;
 		}
 
-		if ($dimensions['length'] > 60){
+		if ($dimensions['length'] > 45){
 			return false;
 		}
 
-		if($dimensions['width'] > 60){
+		if ($dimensions['width'] > 35){
 			return false;
 		}
 
-		if($dimensions['width'] > 60){
-			return false;
-		}
-
-		$total_dimensions = $dimensions['length'] + $dimensions['width'] + $dimensions['height'];
-		if ($total_dimensions > 90){
+		if ($dimensions['height'] > 16) {
 			return false;
 		}
 
