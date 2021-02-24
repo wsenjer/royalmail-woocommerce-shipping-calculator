@@ -156,11 +156,11 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
-= 1.6.3 19.02.2021 =
+= 1.6.3 24.02.2021 =
 * FIXED: removing dimensions print from frontend.
 
 = 1.6.2 19.02.2021 =
-* ADDED: 2021 Royal Mail Prices.
+* ADDED: Fix small parcel calculations.
 
 = 1.6.1 31.12.2020 =
 * ADDED: 2021 Royal Mail Prices.
