@@ -467,9 +467,9 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		return ( $a['cost'] < $b['cost'] ) ? -1 : 1;
     }
 
-	private function is_small_parcel($dimensions){
+	private function is_small_parcel($dimensions)
+    {
 
-        print_r($dimensions);
 		if ($dimensions['weight'] > 2){
 			return false;
 		}
