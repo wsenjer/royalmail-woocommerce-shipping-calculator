@@ -1,4 +1,7 @@
 <?php
+
+use WPRuby\RoyalMailLite\DVDoug\BoxPacker\Packer;
+
 /**
  * WC_Royal_Mail_Shipping_Method
  * @author Waseem Senjer
@@ -117,7 +120,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/Data.php');
 		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/Method.php');
 
-		$package_details =  $this->get_package_details($package);
+		$package_details = $this->get_package_details_by_boxpacker($package);
+
+		if ($package_details === false) {
+			$package_details  =  $this->get_package_details( $package );
+		}
 
 		$this->debug('Settings: ', json_encode($this->instance_settings));
 		$this->debug('Packing Details', $package_details);
@@ -517,4 +524,124 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		}
 		return $methods;
 	}
+
+	/**
+	 * get_package_details_by_boxpacker function.
+	 *
+	 * @access private
+	 * @param mixed $package
+	 * @return mixed
+	 */
+	private function get_package_details_by_boxpacker($package)
+	{
+		$default_length = (isset($this->default_size['length']))?$this->default_size['length']:1;
+		$default_width = (isset($this->default_size['width']))?$this->default_size['width']:1;
+		$default_height = (isset($this->default_size['height']))?$this->default_size['height']:1;
+
+		$packer = new Packer();
+		$boxes = $this->get_royalmail_boxes();
+		foreach ($boxes as $box) {
+			$packer->addBox($box);
+		}
+
+		// Get weight of order
+		foreach ($package['contents'] as $item_id => $values) {
+			/** @var WC_Product $_product */
+			$_product = $values['data'];
+			if ($_product->is_virtual()) {
+				continue;
+			}
+
+			$weight = wc_get_weight((floatval($_product->get_weight()) <= 0) ? $this->default_weight : $_product->get_weight(), 'g');
+			$length = wc_get_dimension((floatval($_product->get_length()) <= 0) ? $default_length : $_product->get_length(), 'mm');
+			$height = wc_get_dimension((floatval($_product->get_height()) <= 0) ? $default_height : $_product->get_height(), 'mm');
+			$width = wc_get_dimension((floatval($_product->get_width()) <= 0) ? $default_width : $_product->get_width(), 'mm');
+			//adding the packer code
+			//2. adding items
+			$item = (new WPRuby_RoyalMail_Item())
+				->setLength($length)
+				->setWidth($width)
+				->setDepth($height)
+				->setWeight($weight)
+				->setDescription($_product->get_name())->setKeepFlat(false);
+			$packer->addItem($item, intval($values['quantity']));
+			//end of the packer code
+		}
+		//adding the packer code
+		//3. packing
+		try {
+			$packedBoxes = $packer->pack();
+		} catch (Exception $e) {
+			return false;
+		}
+
+		$pack = array();
+		$packs_count = 1;
+		$pack[$packs_count]['weight'] = 0;
+		$pack[$packs_count]['length'] = 0;
+		$pack[$packs_count]['height'] = 0;
+		$pack[$packs_count]['width'] = 0;
+		$pack[$packs_count]['quantity'] = 0;
+		foreach ($packedBoxes as $packedBox) {
+			$pack[$packs_count]['weight'] = $packedBox->getWeight() / 1000;
+			$pack[$packs_count]['length'] = $packedBox->getUsedLength() / 10;
+			$pack[$packs_count]['width'] =  $packedBox->getUsedWidth() / 10;
+			$pack[$packs_count]['height'] = $packedBox->getUsedDepth() / 10;
+			$pack[$packs_count]['quantity'] = count($packedBox->getItems()->asArray());
+			$pack[$packs_count]['postcode'] = $package['destination']['postcode'];
+			$packs_count++;
+		}
+		return $pack;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function get_royalmail_boxes()
+	{
+	    $boxes = [];
+		$box = new WPRuby_RoyalMail_Box();
+		if ($this->parcel_size === 'small'){
+		    $boxes[] = (new WPRuby_RoyalMail_Box())
+                ->setReference('Small Parcel')
+                ->setOuterLength(450)
+                ->setOuterWidth(350)
+                ->setOuterDepth(160)
+                ->setEmptyWeight(0)
+                ->setInnerLength(450)
+                ->setInnerWidth(350)
+                ->setInnerDepth(160)
+                ->setMaxWeight(2000);
+			return $boxes;
+		}
+
+		if ($this->parcel_size === 'medium') {
+			$boxes[] = (new WPRuby_RoyalMail_Box())
+				->setReference('Small Parcel')
+				->setOuterLength(450)
+				->setOuterWidth(350)
+				->setOuterDepth(160)
+				->setEmptyWeight(0)
+				->setInnerLength(450)
+				->setInnerWidth(350)
+				->setInnerDepth(160)
+				->setMaxWeight(2000);
+
+			$boxes[] = (new WPRuby_RoyalMail_Box())
+				->setReference('Medium Parcel')
+				->setOuterLength(610)
+				->setOuterWidth(460)
+				->setOuterDepth(460)
+				->setEmptyWeight(0)
+				->setInnerLength(610)
+				->setInnerWidth(460)
+				->setInnerDepth(460)
+				->setMaxWeight(20000);
+			return $boxes;
+
+		}
+		return $boxes;
+
+	}
+
 }

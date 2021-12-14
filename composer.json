@@ -1,0 +1,12 @@
+{
+    "require": {
+        "ext-json": "*",
+        "typisttech/imposter-plugin": "^0.6.0",
+        "dvdoug/boxpacker": "^2.7"
+    },
+    "extra": {
+        "imposter": {
+            "namespace": "WPRuby\\RoyalMailLite"
+        }
+    }
+}
