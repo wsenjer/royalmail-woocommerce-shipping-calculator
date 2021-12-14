@@ -3,7 +3,7 @@
  * WC_Royal_Mail_Shipping_Method
  * @author Waseem Senjer
  * @since 1.0.0
- * 
+ *
  * */
 class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
@@ -40,7 +40,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$this->default_weight = $this->get_option('default_weight');
 		$this->default_size = $this->get_option('default_size');
-		
+
 		$this->parcel_size = $this->get_option('parcel_size');
 
 		$this->domestic_options = $this->get_option('domestic_options');
@@ -118,7 +118,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/Method.php');
 
 		$package_details =  $this->get_package_details($package);
-		
+
 		$this->debug('Settings: ', json_encode($this->instance_settings));
 		$this->debug('Packing Details', $package_details);
 
@@ -131,7 +131,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
         	$calculateMethodClass->_csvCleanNameToMethod,
         	$calculateMethodClass->_csvCleanNameMethodGroup
    		);
-        
+
    		$rates = array();
         foreach($package_details as $pack){
         	$allowedMethods = $this->getAllowedMethods($pack, $package['destination']['country']);
@@ -167,12 +167,12 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 	            $allMethods = $this->getAllMethods();
 	            foreach ($allowedMethods as $allowedMethod) {
-	                
+
 	                foreach ($calculatedMethods as $methodItem) {
 	                    if(isset($allMethods[$allowedMethod])){
 		                    if ($allMethods[$allowedMethod] == $methodItem->shippingMethodNameClean) {
 								$this->debug('Shipping Methods: ', $methodItem);
-		                    	
+
 	                        	$price = $methodItem->methodPrice;
 
 								if(!isset($rates[$methodItem->shippingMethodName])){
@@ -186,7 +186,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 								}else{
 		             				$rates[$methodItem->shippingMethodName]['cost'] = $rates[$methodItem->shippingMethodName]['cost'] + $price;
 								}
-		                    
+
 		                    }
 	                	}
 	                }
@@ -272,7 +272,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		// @since 1.5 order the products by their postcodes
 		array_multisort($products, SORT_ASC, $products);
 
-		$pack = array();
+		$pack = [];
 		$packs_count = 1;
 		$pack[$packs_count]['weight'] = 0;
 		$pack[$packs_count]['length'] = 0;
@@ -299,7 +299,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				$pack[$packs_count]['quantity'] += 1;
 				$pack[$packs_count]['value'] += round($product['value'], 2);
 				$package_height = self::get_min_dimension($pack[$packs_count]['width'], $pack[$packs_count]['length'], $pack[$packs_count]['height']);
-	
+
 
 				if ($pack[$packs_count]['weight'] > $max_weight) {
 
@@ -330,7 +330,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		return $pack;
 	}
 
-	
+
 
 	private function get_max_weight($package, $total_weight) {
 		// @TODO
@@ -354,11 +354,11 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'own_package' => $max_weights['own_package'],
 			);
 		}
-		
+
 	}
 
 
-	
+
 
 
 
@@ -382,9 +382,9 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 							</th>
 			<td class="forminp">
 				<fieldset>
-					<label for="woocommerce_wpruby_royalmail_default_length"><?php _e('Length', 'wc-royal-mail'); ?></label> <input id="woocommerce_wpruby_royalmail_default_length" name="woocommerce_wpruby_royalmail_default_length" type="text" value="<?php echo esc_attr($length); ?>" style="width:70px" /> 
-					<label for="woocommerce_wpruby_royalmail_default_width"><?php _e('Width', 'wc-royal-mail'); ?></label>  <input id="woocommerce_wpruby_royalmail_default_width" name="woocommerce_wpruby_royalmail_default_width" type="text" value="<?php echo esc_attr($width); ?>" style="width:70px" /> 
-					<label for="woocommerce_wpruby_royalmail_default_height"><?php _e('Height', 'wc-royal-mail'); ?></label> <input id="woocommerce_wpruby_royalmail_default_height" name="woocommerce_wpruby_royalmail_default_height" type="text" value="<?php echo esc_attr($height); ?>" style="width:70px" /> 
+					<label for="woocommerce_wpruby_royalmail_default_length"><?php _e('Length', 'wc-royal-mail'); ?></label> <input id="woocommerce_wpruby_royalmail_default_length" name="woocommerce_wpruby_royalmail_default_length" type="text" value="<?php echo esc_attr($length); ?>" style="width:70px" />
+					<label for="woocommerce_wpruby_royalmail_default_width"><?php _e('Width', 'wc-royal-mail'); ?></label>  <input id="woocommerce_wpruby_royalmail_default_width" name="woocommerce_wpruby_royalmail_default_width" type="text" value="<?php echo esc_attr($width); ?>" style="width:70px" />
+					<label for="woocommerce_wpruby_royalmail_default_height"><?php _e('Height', 'wc-royal-mail'); ?></label> <input id="woocommerce_wpruby_royalmail_default_height" name="woocommerce_wpruby_royalmail_default_height" type="text" value="<?php echo esc_attr($height); ?>" style="width:70px" />
 					<p class="description">Size unit: <?php echo $dimensions_unit; ?><br> This dimension will only be used if the product\s dimensions are not set in the edit product's page.</p>
 				</fieldset>
 			</td>
@@ -461,7 +461,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		echo "<div class='error'><p>$message $link</p></div>";
 	}
 
-	/** sort rates based on cost **/	
+	/** sort rates based on cost **/
     public function sort_rates( $a, $b ) {
 		if ( $a['cost'] == $b['cost'] ) return 0;
 		return ( $a['cost'] < $b['cost'] ) ? -1 : 1;
