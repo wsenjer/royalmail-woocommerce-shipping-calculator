@@ -9,11 +9,11 @@ Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Royal Mail Shipping Calculator is a Wordpress Plugin that integrate the Royal Mail service, it will calculate the shipping costs for your customers.
+WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping costs for your customers.
 
 
 == Description ==
-WooCommerce Royal Mail Shipping Calculator is a Wordpress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer.
+WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer.
 
 If you have any issues or questions, please open a thread in the WordPress.org forum or you can open a [support ticket](wpruby.com/submit-ticket/ "support ticket") on our website.
 
