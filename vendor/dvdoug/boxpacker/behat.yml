@@ -1,0 +1,21 @@
+default:
+  suites:
+    packer:
+      paths:
+        - '%paths.base%/features/common'
+      contexts: [ PackerContext ]
+
+  extensions:
+    DVDoug\Behat\CodeCoverage\Extension:
+      filter:
+        include:
+          directories:
+            'src': ~
+      reports:
+        clover:
+          target: build/coverage-behat/clover.xml
+        html:
+          target: build/coverage-behat
+        text:
+          showColors: true
+          showUncoveredFiles: true
