@@ -50,6 +50,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$this->debug_mode = $this->get_option('debug_mode');
 		$this->with_insurance = $this->get_option('with_insurance');
+		$this->enable_stripping_tax = $this->get_option('enable_stripping_tax');
 
 		add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
 	}
@@ -107,6 +108,13 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'label' => __('Enable ', 'wc-royal-mail'),
 				'default' => 'no',
 				'description' => __('If enabled, the plugin will consider, the amount of the package as a compensation amount, some services might be unavailable if the items in the package has a high price',  'wc-royal-mail'),
+			),
+			'enable_stripping_tax' => array(
+				'title' => __('Remove Tax', 'wc-royal-mail'),
+				'type' => 'checkbox',
+				'default' => 'no',
+				'label' => __('Enable', 'wc-royal-mail'),
+				'description' => __('Hint: Enabling this option will strip the tax value (20%) from the shipping prices coming from Royal Mail.', 'wc-royal-mail'),
 			),
 		);
 
@@ -181,7 +189,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 								$this->debug('Shipping Methods: ', $methodItem);
 
 	                        	$price = $methodItem->methodPrice;
-
+			                    $price = $this->strip_shipping_tax($price);
 								if(!isset($rates[$methodItem->shippingMethodName])){
 									$rates[$methodItem->shippingMethodName] = array();
 			                        $rates[$methodItem->shippingMethodName]['id'] =  $methodItem->shippingMethodName;
@@ -642,6 +650,20 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		}
 		return $boxes;
 
+	}
+
+	/**
+	 * @param $rate_cost
+	 *
+	 * @return float
+	 */
+	private function strip_shipping_tax($rate_cost)
+    {
+		if ('yes' !== $this->enable_stripping_tax) {
+			return $rate_cost;
+		}
+
+		return $rate_cost / 1.2;
 	}
 
 }
