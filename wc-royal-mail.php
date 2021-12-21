@@ -34,8 +34,8 @@ class WPRuby_RoyalMail_Lite {
 	 * */
 	public function init_royal_mail()
 	{
-		require 'includes/class-wpruby-royalmail-item.php';
-		require 'includes/class-wpruby-royalmail-box.php';
+		require_once plugin_dir_path(__FILE__) .'includes/class-wpruby-royalmail-item.php';
+		require_once plugin_dir_path(__FILE__) . 'includes/class-wpruby-royalmail-box.php';
 		require_once 'class-wc-royal-mail-shipping-method.php';
 		if (version_compare(WC()->version, '2.6.0', 'lt')){
 			require_once 'class-wc-royal-mail-shipping-method-legacy.php';

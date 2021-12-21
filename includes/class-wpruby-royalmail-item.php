@@ -13,6 +13,18 @@ class WPRuby_RoyalMail_Item implements Item
 	private $weight;
 	private $volume;
 	private $keep_flat;
+	private $price;
+
+	public function getPrice()
+	{
+		return $this->price;
+	}
+
+	public function setPrice($price)
+	{
+		$this->price = $price;
+		return $this;
+	}
 
 	public function getDescription()
 	{

@@ -564,6 +564,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			$length = wc_get_dimension((floatval($_product->get_length()) <= 0) ? $default_length : $_product->get_length(), 'mm');
 			$height = wc_get_dimension((floatval($_product->get_height()) <= 0) ? $default_height : $_product->get_height(), 'mm');
 			$width = wc_get_dimension((floatval($_product->get_width()) <= 0) ? $default_width : $_product->get_width(), 'mm');
+
 			//adding the packer code
 			//2. adding items
 			$item = (new WPRuby_RoyalMail_Item())
@@ -571,7 +572,8 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				->setWidth($width)
 				->setDepth($height)
 				->setWeight($weight)
-				->setDescription($_product->get_name())->setKeepFlat(false);
+				->setDescription($_product->get_name())->setKeepFlat(false)
+                ->setPrice($_product->get_price());
 			$packer->addItem($item, intval($values['quantity']));
 			//end of the packer code
 		}
@@ -590,6 +592,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$pack[$packs_count]['height'] = 0;
 		$pack[$packs_count]['width'] = 0;
 		$pack[$packs_count]['quantity'] = 0;
+		$pack[$packs_count]['value'] = 0;
 		foreach ($packedBoxes as $packedBox) {
 			$pack[$packs_count]['weight'] = $packedBox->getWeight() / 1000;
 			$pack[$packs_count]['length'] = $packedBox->getUsedLength() / 10;
@@ -597,6 +600,10 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 			$pack[$packs_count]['height'] = $packedBox->getUsedDepth() / 10;
 			$pack[$packs_count]['quantity'] = count($packedBox->getItems()->asArray());
 			$pack[$packs_count]['postcode'] = $package['destination']['postcode'];
+			$pack[$packs_count]['value'] = array_reduce($packedBox->getItems()->asArray(), function ($carry, $item){
+				$carry += $item->getPrice();
+				return $carry;
+			});
 			$packs_count++;
 		}
 		return $pack;
