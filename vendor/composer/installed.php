@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7942306b954513cb183bd628e513cdcf033f9899',
+    'reference' => 'b46641a915511f07c81af422a6bfc1980d2ec641',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7942306b954513cb183bd628e513cdcf033f9899',
+      'reference' => 'b46641a915511f07c81af422a6bfc1980d2ec641',
     ),
     'dvdoug/boxpacker' => 
     array (

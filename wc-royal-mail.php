@@ -14,7 +14,12 @@
  * Domain Path:       /languages
  */
 
+if (!(PHP_VERSION_ID >= 70300)) {
+	return;
+}
+
 require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+
 
 class WPRuby_RoyalMail_Lite {
 

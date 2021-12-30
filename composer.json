@@ -1,5 +1,6 @@
 {
     "require": {
+        "php": "^7.0 || ^8.0",
         "ext-json": "*",
         "typisttech/imposter-plugin": "^0.6.0",
         "dvdoug/boxpacker": "^2.7"
