@@ -3,8 +3,8 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
 Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 1.7.2
+Tested up to: 5.9
+Stable tag: 1.7.3
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -156,6 +156,12 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.7.3 =
+
+*(30.01.2022)*
+
+* Added: WordPress 5.9 compatibility.
+
 = 1.7.2 30.12.2021 =
 * Fixed: update minimum PHP version to 7.3
 
