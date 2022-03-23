@@ -19,7 +19,7 @@
 				</table><!--/.form-table-->
 			</div>
 			<div id="postbox-container-1" class="postbox-container">
-                    <div id="side-sortables" class="meta-box-sortables ui-sortable"> 
+                    <div id="side-sortables" class="meta-box-sortables ui-sortable">
                         <div class="postbox ">
 
                                 <h3 class="hndle"><span><i class="dashicons dashicons-update"></i>&nbsp;&nbsp;Upgrade to Pro</span></h3>
@@ -27,6 +27,8 @@
                             <div class="inside">
                                     <div class="support-widget">
                                         <ul>
+                                            <li>» <span style="color: #ff0000;">(New)</span> Evri (Hermes UK)</li>
+                                            <li>» <span style="color: #ff0000;">(New)</span> DPD UK</li>
                                             <li>» UK Parcelforce</li>
                                             <li>» UK Parcelforce Worldwide</li>
                                             <li>» International Standard</li>
@@ -42,7 +44,7 @@
                                             <li>» Auto Hassle-Free Updates</li>
                                             <li>» High Priority Customer Support</li>
                                         </ul>
-										<a href="https://wpruby.com/plugin/woocommerce-royal-mail-shipping-calculator-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a> 
+										<a href="https://wpruby.com/plugin/woocommerce-royal-mail-shipping-calculator-pro/" class="button wpruby_button" target="_blank"><span class="dashicons dashicons-star-filled"></span> Upgrade Now</a>
                                     </div>
                                 </div>
 	                        </div>

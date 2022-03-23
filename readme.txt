@@ -1,10 +1,10 @@
 === WooCommerce Royal Mail Shipping Calculator ===
 Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
-Tags: woocommerce,shipping, woocommerce extension, UK, Royal Mail,admin,shipping method
+Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,7 +38,7 @@ The debug mode is an excellent tool to test out the plugin’s settings and ship
 == Pro features ==
 
 #### Domestic Parcel Shipping
-All of domestic shipping options are supported. You can anytime, disable/enable one or all of these options.
+All the domestic shipping options are supported. You can anytime, disable/enable one or all of these options.
 
 `* Standard First Class Small Parcel
 * Standard First Class Medium Parcel
@@ -62,6 +62,32 @@ A wide range of international shipping options are supported:
 * International Tracked Small Parcel
 * International Signed Small Parcel`
 
+#### Evri Domestic Shipping
+
+`* Standard Delivery: Delivery in 2 – 4 days.
+* Next Day Delivery: Delivery in 1 working day to most UK destinations.`
+
+#### Evri International Shipping
+
+`* Evri Parcelshop:  Drop off your parcel at your local shop and we’ll do the rest.
+* Evri Courier: Print your own parcel labels and Evri will collect them from your location between 8 am – 8 pm.`
+
+#### DPD Domestic Shipping
+
+`* Shop to Shop
+* Drop off at Shop
+* Door 2 Door – Next Day
+* Door to Door – By 12
+* Door to Door – By 10:30`
+
+#### DPD International Shipping
+
+`* Drop off at Shop – DPD Classic
+* Door 2 Door – DPD Classic
+* Drop off at Shop – Air Classic
+* Door 2 Door – Air Classic
+* Drop off at Shop – Air Express
+* Door 2 Door – Air Express`
 
 #### Parcelforce Shipping
 
@@ -92,8 +118,8 @@ If you sell small-sized items, you can always enable the letters option to save 
   * Second Class: Large Letter
   * Signed For: First Class Letter
   * Signed For: First Class Large Letter
-  * Signed For: Second Class Class Letter
-  * Signed For: Second Class Class Large Letter
+  * Signed For: Second Class Letter
+  * Signed For: Second Class Large Letter
 
 
 * **International Letters Options**
@@ -156,10 +182,10 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
-= 1.7.3 =
+= 1.7.4 23.03.2022 =
+* Added: WooCommerce 6.3 compatibility.
 
-*(30.01.2022)*
-
+= 1.7.3 30.01.2022 =
 * Added: WordPress 5.9 compatibility.
 
 = 1.7.2 30.12.2021 =
