@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
 Tested up to: 5.9
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -182,6 +182,9 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.7.7 08.04.2022 =
+* Fixed: Standard Second Class Small Parcel was not working.
+
 = 1.7.6 06.04.2022 =
 * Fixed: Signed For: First Class Small Parcel was not working.
 
