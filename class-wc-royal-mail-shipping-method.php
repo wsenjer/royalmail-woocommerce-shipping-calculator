@@ -13,8 +13,8 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	public $supported_services = array(
 		'firstclasssmall'					=>	'Standard First Class Small Parcel',
 		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
-		'secondclasssmallparcel'			=>	'Second Class: Small Parcel',
-		'secondclassmediumparcel'			=>	'Second Class: Medium Parcel',
+		'secondclasssmallparcel'			=>	'Second Class Small Parcel',
+		'secondclassmediumparcel'			=>	'Second Class Medium Parcel',
 		'firstclasssignedforsmall'			=>	'Signed For: First Class Small Parcel',
 		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
 		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
