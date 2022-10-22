@@ -3,7 +3,7 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
-Tested up to: 5.9
+Tested up to: 6.0.1
 Stable tag: 1.7.7
 Requires PHP: 7.3
 License: GPLv2 or later
@@ -15,8 +15,10 @@ WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate 
 == Description ==
 WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer.
 
-If you have any issues or questions, please open a thread in the WordPress.org forum or you can open a [support ticket](wpruby.com/submit-ticket/ "support ticket") on our website.
+If you have any issues or questions, please open a thread in the WordPress.org forum, or you can open a [support ticket](wpruby.com/submit-ticket/ "support ticket") on our website.
 
+* [Upgrade to Pro Now](https://wpruby.com/plugin/woocommerce-royal-mail-shipping-calculator-pro/?utm_source=royalmail-lite&utm_medium=readme&utm_campaign=freetopro "Upgrade to Pro Now")
+* [Documentation](https://wpruby.com/knowledgebase_category/woocommerce-royal-mail-shipping-calculator-pro/ "Documentation ")
 
 
 == Plugin’s features ==
@@ -138,10 +140,6 @@ If you sell small-sized items, you can always enable the letters option to save 
 If either you need to add a handling fees for your shipping order, or if you want to reduce the shipping costs for your customers. We set an option for that where you can add an amount value to reduce or increase the shipping cost. The value can be either a number or a percentage, positive for handling fees and negative for discounts.
 #### Display the Cheapest options
 Cut to the Chase and provide the cheapest option to your customers without putting them in the hustle of choosing from many options.
-
-
-* [Upgrade to Pro Now](https://wpruby.com/plugin/woocommerce-royal-mail-shipping-calculator-pro/ "Upgrade to Pro Now")
-* [Documentation](https://wpruby.com/knowledgebase_category/woocommerce-royal-mail-shipping-calculator-pro/ "Documentation ")
 
 
 
