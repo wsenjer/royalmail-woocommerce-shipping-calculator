@@ -72,7 +72,7 @@ A wide range of international shipping options are supported:
 #### Evri International Shipping
 
 `* Evri Parcelshop:  Drop off your parcel at your local shop and we’ll do the rest.
-* Evri Courier: Print your own parcel labels and Evri will collect them from your location between 8 am – 8 pm.`
+* Evri Courier: Evri will collect your parcels from your location between 8 am – 8 pm.`
 
 #### DPD Domestic Shipping
 
