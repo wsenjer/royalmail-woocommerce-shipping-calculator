@@ -3,8 +3,8 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
-Tested up to: 6.0.1
-Stable tag: 1.7.8
+Tested up to: 6.2
+Stable tag: 1.7.9
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,9 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.7.9 03.04.2023 =
+* Added: Royal Mail Prices (April 2023).
+
 = 1.7.8 22.10.2022 =
 * Added: WordPress 6.0 compatibility.
 * Added: WooCommerce 7.0 compatibility.
