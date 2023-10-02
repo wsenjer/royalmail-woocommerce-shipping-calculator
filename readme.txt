@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
 Tested up to: 6.3
-Stable tag: 1.7.10
+Stable tag: 1.7.11
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,8 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.7.11 02.10.2023 =
+* Added: Royal Mail Prices (October 2023).
 
 = 1.7.10 23.07.2023 =
 * Fixed: Special Delivery: Guaranteed by 1pm was not working.
