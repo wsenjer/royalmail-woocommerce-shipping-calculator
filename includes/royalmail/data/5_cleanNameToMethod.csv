@@ -1,10 +1,10 @@
 "specialdelivery9am","Special Delivery: Guaranteed by 9am",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_9AM_50,0,50,50
 "specialdelivery9am","Special Delivery: Guaranteed by 9am",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_9AM_1000,51,1000,1000
 "specialdelivery9am","Special Delivery: Guaranteed by 9am",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_9AM_2500,1001,2500,2500
-"specialdelivery1pm","Special Delivery: Guaranteed by 1pm",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_500,0,500,500
+"specialdelivery1pm","Special Delivery: Guaranteed by 1pm",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_750,0,750,750
 "specialdelivery1pm","Special Delivery: Guaranteed by 1pm",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_1000,501,1000,1000
 "specialdelivery1pm","Special Delivery: Guaranteed by 1pm",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_2500,1001,2500,2500
-"specialdelivery1pmsaturday","Special Delivery: Guaranteed by 1pm Saturday",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_SATURDAY_500,0,500,500
+"specialdelivery1pmsaturday","Special Delivery: Guaranteed by 1pm Saturday",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_SATURDAY_750,0,750,750
 "specialdelivery1pmsaturday","Special Delivery: Guaranteed by 1pm Saturday",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_SATURDAY_1000,501,1000,1000
 "specialdelivery1pmsaturday","Special Delivery: Guaranteed by 1pm Saturday",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_1PM_SATURDAY_2500,1001,2500,2500
 "specialdelivery9amsaturday","Special Delivery: Guaranteed by 9am Saturday",UK_GUARANTEED_ROYAL_MAIL_SPECIAL_DELIVERY_9AM_SATURDAY_50,0,50,50
