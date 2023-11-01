@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
 Tested up to: 6.3
-Stable tag: 1.7.11
+Stable tag: 1.7.12
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,10 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.7.12 01.11.2023 =
+* Added: WooCommerce HPOS support.
+* Fixed: If the Small Parcel option is selected, then the plugin will keep splitting the order into small parcels. Now it will revert to medium parcels after 2kg.
+
 = 1.7.11 02.10.2023 =
 * Added: Royal Mail Prices (October 2023).
 
