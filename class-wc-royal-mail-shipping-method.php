@@ -615,46 +615,29 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	private function get_royalmail_boxes()
 	{
 	    $boxes = [];
-		$box = new WPRuby_RoyalMail_Box();
-		if ($this->parcel_size === 'small'){
-		    $boxes[] = (new WPRuby_RoyalMail_Box())
-                ->setReference('Small Parcel')
-                ->setOuterLength(450)
-                ->setOuterWidth(350)
-                ->setOuterDepth(160)
-                ->setEmptyWeight(0)
-                ->setInnerLength(450)
-                ->setInnerWidth(350)
-                ->setInnerDepth(160)
-                ->setMaxWeight(2000);
-			return $boxes;
-		}
 
-		if ($this->parcel_size === 'medium') {
-			$boxes[] = (new WPRuby_RoyalMail_Box())
-				->setReference('Small Parcel')
-				->setOuterLength(450)
-				->setOuterWidth(350)
-				->setOuterDepth(160)
-				->setEmptyWeight(0)
-				->setInnerLength(450)
-				->setInnerWidth(350)
-				->setInnerDepth(160)
-				->setMaxWeight(2000);
+		$boxes[] = (new WPRuby_RoyalMail_Box())
+			->setReference('Small Parcel')
+			->setOuterLength(450)
+			->setOuterWidth(350)
+			->setOuterDepth(160)
+			->setEmptyWeight(0)
+			->setInnerLength(450)
+			->setInnerWidth(350)
+			->setInnerDepth(160)
+			->setMaxWeight(2000);
 
-			$boxes[] = (new WPRuby_RoyalMail_Box())
-				->setReference('Medium Parcel')
-				->setOuterLength(610)
-				->setOuterWidth(460)
-				->setOuterDepth(460)
-				->setEmptyWeight(0)
-				->setInnerLength(610)
-				->setInnerWidth(460)
-				->setInnerDepth(460)
-				->setMaxWeight(20000);
-			return $boxes;
+		$boxes[] = (new WPRuby_RoyalMail_Box())
+			->setReference('Medium Parcel')
+			->setOuterLength(610)
+			->setOuterWidth(460)
+			->setOuterDepth(460)
+			->setEmptyWeight(0)
+			->setInnerLength(610)
+			->setInnerWidth(460)
+			->setInnerDepth(460)
+			->setMaxWeight(20000);
 
-		}
 		return $boxes;
 
 	}
