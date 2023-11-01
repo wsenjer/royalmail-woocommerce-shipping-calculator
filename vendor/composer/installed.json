@@ -307,6 +307,6 @@
             "install-path": "../typisttech/imposter-plugin"
         }
     ],
-    "dev": false,
+    "dev": true,
     "dev-package-names": []
 }

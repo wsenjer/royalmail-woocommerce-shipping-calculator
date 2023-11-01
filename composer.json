@@ -9,5 +9,10 @@
         "imposter": {
             "namespace": "WPRuby\\RoyalMailLite"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "typisttech/imposter-plugin": true
+        }
     }
 }
