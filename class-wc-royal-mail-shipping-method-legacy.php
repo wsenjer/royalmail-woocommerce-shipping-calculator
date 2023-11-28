@@ -1,9 +1,11 @@
 <?php
+
+namespace WPRubyRoyalMail;
 /**
  * WC_Royal_Mail_Shipping_Method
  * @author Waseem Senjer
  * @since 1.0.0
- * 
+ *
  * */
 class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method{
 
@@ -23,12 +25,12 @@ class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method
 
 		$this->default_weight = $this->get_option('default_weight');
 		$this->default_size = $this->get_option('default_size');
-		
+
 		$this->parcel_size = $this->get_option('parcel_size');
 
 		$this->domestic_options = $this->get_option('domestic_options');
 
-	
+
 
 		$this->availability = $this->get_option('availability');
 		$this->countries = $this->get_option('countries');
@@ -43,12 +45,12 @@ class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method
 		$weight_unit = strtolower(get_option('woocommerce_weight_unit'));
 
 		$this->form_fields = array(
-			'enabled' => array(		
-				'title' => __('Enable/Disable', 'wc-royal-mail'),		
-				'type' => 'checkbox',		
-				'label' => __('Enable Royal Mail', 'wc-royal-mail'),		
-				'default' => 'no',		
-			),			
+			'enabled' => array(
+				'title' => __('Enable/Disable', 'wc-royal-mail'),
+				'type' => 'checkbox',
+				'label' => __('Enable Royal Mail', 'wc-royal-mail'),
+				'default' => 'no',
+			),
 			'title' => array(
 				'title' => __('Method Title', 'wc-royal-mail'),
 				'type' => 'text',
@@ -92,12 +94,12 @@ class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method
 				'css' 		=> 'width:80%;',
 				'default'	=> '',
 				'options' 	=> $this->supported_services,
-			),	
+			),
 		);
 
 	}
 
-	
+
 	/**
 	 * Admin Panel Options
 	 * - Options for bits like 'title' and availability on a country-by-country basis
@@ -110,5 +112,5 @@ class WC_Royal_Mail_Shipping_Method_Legacy extends WC_Royal_Mail_Shipping_Method
 	}
 
 
-	
+
 }

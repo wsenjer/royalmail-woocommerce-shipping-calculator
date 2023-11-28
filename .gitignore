@@ -1,3 +1,5 @@
 .idea
 .DS_Store
 royalmail-woocommerce-shipping-calculator.zip
+vendor
+vendor-bin

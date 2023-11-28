@@ -2,8 +2,10 @@
     "require": {
         "php": "^7.0 || ^8.0",
         "ext-json": "*",
-        "typisttech/imposter-plugin": "^0.6.0",
         "dvdoug/boxpacker": "^2.7"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "dev-master"
     },
     "extra": {
         "imposter": {
@@ -12,7 +14,7 @@
     },
     "config": {
         "allow-plugins": {
-            "typisttech/imposter-plugin": true
+            "bamarni/composer-bin-plugin": true
         }
     }
 }

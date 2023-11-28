@@ -13,12 +13,13 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages
  */
+namespace WPRubyRoyalMail;
 
 if (!(PHP_VERSION_ID >= 70300)) {
 	return;
 }
 
-require_once plugin_dir_path(__FILE__) . 'vendor/autoload.php';
+require_once plugin_dir_path(__FILE__) . 'includes/autoloader.php';
 
 
 class WPRuby_RoyalMail_Lite {
@@ -39,9 +40,6 @@ class WPRuby_RoyalMail_Lite {
 	 * */
 	public function init_royal_mail()
 	{
-		require_once plugin_dir_path(__FILE__) .'includes/class-wpruby-royalmail-item.php';
-		require_once plugin_dir_path(__FILE__) . 'includes/class-wpruby-royalmail-box.php';
-		require_once 'class-wc-royal-mail-shipping-method.php';
 		if (version_compare(WC()->version, '2.6.0', 'lt')){
 			require_once 'class-wc-royal-mail-shipping-method-legacy.php';
 		}
@@ -53,9 +51,9 @@ class WPRuby_RoyalMail_Lite {
 	public function add_royal_mail_method( $methods )
 	{
 		if(version_compare(WC()->version, '2.6.0', 'lt')){
-			$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method_Legacy';
+			$methods['wpruby_royalmail'] = WC_Royal_Mail_Shipping_Method_Legacy::class;
 		}else{
-			$methods['wpruby_royalmail'] = 'WC_Royal_Mail_Shipping_Method';
+			$methods['wpruby_royalmail'] = WC_Royal_Mail_Shipping_Method::class;
 		}
 		return $methods;
 	}

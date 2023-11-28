@@ -1,7 +1,7 @@
 <?php
+namespace WPRubyRoyalMail\Includes;
 
-
-use WPRuby\RoyalMailLite\DVDoug\BoxPacker\Box;
+use WPRubyRoyalMail\Build\DVDoug\BoxPacker\Box;
 
 class WPRuby_RoyalMail_Box implements Box
 {

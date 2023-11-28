@@ -1,7 +1,7 @@
 <?php
+namespace WPRubyRoyalMail\Includes;
 
-
-use WPRuby\RoyalMailLite\DVDoug\BoxPacker\Item;
+use WPRubyRoyalMail\Build\DVDoug\BoxPacker\Item;
 
 class WPRuby_RoyalMail_Item implements Item
 {
