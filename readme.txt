@@ -3,8 +3,8 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
 Requires at least: 5.0
-Tested up to: 6.3
-Stable tag: 1.7.12
+Tested up to: 6.4
+Stable tag: 1.8.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,10 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.8.0 07.01.2023 =
+* Fixed: Dependency conflicts.
+* Fixed: Signed For Medium Parcel was not working.
+
 = 1.7.12 01.11.2023 =
 * Added: WooCommerce HPOS support.
 * Fixed: If the Small Parcel option is selected, then the plugin will keep splitting the order into small parcels. Now it will revert to medium parcels after 2kg.
