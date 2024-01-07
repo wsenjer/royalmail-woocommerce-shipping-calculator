@@ -23,7 +23,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		'secondclasssmallparcel'			=>	'Second Class Small Parcel',
 		'secondclassmediumparcel'			=>	'Second Class Medium Parcel',
 		'firstclasssignedforsmall'			=>	'Signed For: First Class Small Parcel',
-		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
+		'firstclasssignedformedium'			=>	'Signed For: First Class Medium Parcel',
 		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
 		'secondclassmediumparcelsignedfor'	=>	'Signed For: Second Class Medium Parcel',
 		'specialdelivery9am'				=>	'Special Delivery: Guaranteed by 9am',
