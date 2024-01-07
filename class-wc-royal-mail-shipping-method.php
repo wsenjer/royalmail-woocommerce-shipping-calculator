@@ -1,6 +1,13 @@
 <?php
+namespace WPRubyRoyalMail;
 
-use WPRuby\RoyalMailLite\DVDoug\BoxPacker\Packer;
+
+use WPRubyRoyalMail\Build\DVDoug\BoxPacker\Packer;
+use WPRubyRoyalMail\Includes\RoyalMail\Src\Calculated_Method;
+use WPRubyRoyalMail\Includes\RoyalMail\Src\Data;
+use \WC_Shipping_Method;
+use WPRubyRoyalMail\Includes\WPRuby_RoyalMail_Box;
+use WPRubyRoyalMail\Includes\WPRuby_RoyalMail_Item;
 
 /**
  * WC_Royal_Mail_Shipping_Method
@@ -16,7 +23,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		'secondclasssmallparcel'			=>	'Second Class Small Parcel',
 		'secondclassmediumparcel'			=>	'Second Class Medium Parcel',
 		'firstclasssignedforsmall'			=>	'Signed For: First Class Small Parcel',
-		'firstclasssignedformedium'			=>	'Signed For: First Medium Parcel',
+		'firstclasssignedformedium'			=>	'Signed For: First Class Medium Parcel',
 		'secondclasssmallparcelsignedfor'	=>	'Signed For: Second Class Small Parcel',
 		'secondclassmediumparcelsignedfor'	=>	'Signed For: Second Class Medium Parcel',
 		'specialdelivery9am'				=>	'Special Delivery: Guaranteed by 9am',
@@ -124,9 +131,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		if($package['destination']['country'] != 'GB'){
 			return;
 		}
-		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/CalculateMethod.php');
-		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/Data.php');
-		require_once(plugin_dir_path(__FILE__). 'includes/royalmail/Src/Method.php');
+
 
 		$package_details = $this->get_package_details_by_boxpacker($package);
 
@@ -137,8 +142,8 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		$this->debug('Settings: ', json_encode($this->instance_settings));
 		$this->debug('Packing Details', $package_details);
 
-		$calculateMethodClass = new Meanbee_RoyalmailPHPLibrary_CalculateMethod();
-   		$dataClass = new Meanbee_RoyalmailPHPLibrary_Data(
+		$calculateMethodClass = new Calculated_Method();
+   		$dataClass = new Data(
         	$calculateMethodClass->_csvCountryCode,
         	$calculateMethodClass->_csvZoneToDeliverMethod,
         	$calculateMethodClass->_csvDeliveryMethodMeta,
