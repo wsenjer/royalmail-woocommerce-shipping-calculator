@@ -266,3 +266,6 @@
 "printedpaperworldwidetrackedandsigned","International Tracked & Signed Printed Papers",WORLD_ZONE_ONE_PRINTED_PAPER_TRACKED_AND_SIGNED,0,1000,1000
 "printedpaperworldwidetrackedandsigned","International Tracked & Signed Printed Papers",WORLD_ZONE_TWO_PRINTED_PAPER_TRACKED_AND_SIGNED,0,1000,1000
 "printedpaperworldwidetrackedandsigned","International Tracked & Signed Printed Papers",WORLD_ZONE_THREE_PRINTED_PAPER_TRACKED_AND_SIGNED,0,1000,1000
+"internationalsignedtrackedheavier","International Tracked & Signed Heavier",WORLD_ZONE_EU_ONE_INTERNATIONAL_TRACKED_AND_SIGNED_HEAVIER,0,1000,1000
+"internationalsignedtrackedheavier","International Tracked & Signed Heavier",WORLD_ZONE_EU_TWO_INTERNATIONAL_TRACKED_AND_SIGNED_HEAVIER,0,1000,1000
+"internationalsignedtrackedheavier","International Tracked & Signed Heavier",WORLD_ZONE_EU_THREE_INTERNATIONAL_TRACKED_AND_SIGNED_HEAVIER,0,1000,1000
