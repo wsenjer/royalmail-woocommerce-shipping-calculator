@@ -586,7 +586,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 		//3. packing
 		try {
 			$packedBoxes = $packer->pack();
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			return false;
 		}
 
