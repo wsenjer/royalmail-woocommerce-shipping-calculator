@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d9e92b8fed23900be343051a6fe7e94",
+    "content-hash": "fefd8260fecd099822955341411b8dbb",
     "packages": [
         {
             "name": "dvdoug/boxpacker",

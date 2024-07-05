@@ -7,11 +7,6 @@
     "require-dev": {
         "bamarni/composer-bin-plugin": "dev-master"
     },
-    "extra": {
-        "imposter": {
-            "namespace": "WPRuby\\RoyalMailLite"
-        }
-    },
     "config": {
         "allow-plugins": {
             "bamarni/composer-bin-plugin": true

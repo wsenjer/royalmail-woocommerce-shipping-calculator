@@ -1,7 +1,7 @@
 === WooCommerce Royal Mail Shipping Calculator ===
 Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
-Tags: Royal Mail,admin,shipping method, DPD, Evri,Hermes, Hermes UK, woocommerce,shipping, woocommerce extension
+Tags: Royal Mail,shipping method, DPD, Evri,woocommerce
 Requires at least: 5.0
 Tested up to: 6.5
 Stable tag: 1.9.0
@@ -9,7 +9,7 @@ Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping costs for your customers.
+WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service.
 
 
 == Description ==
