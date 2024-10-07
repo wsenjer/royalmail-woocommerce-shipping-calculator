@@ -107,8 +107,8 @@ class OrientatedItemSorter implements LoggerAwareInterface
             return $followingItemDecider;
         }
         // otherwise prefer leaving minimum possible gap, or the greatest footprint
-        $orientationAMinGap = \min($orientationAWidthLeft, $orientationALengthLeft);
-        $orientationBMinGap = \min($orientationBWidthLeft, $orientationBLengthLeft);
+        $orientationAMinGap = min($orientationAWidthLeft, $orientationALengthLeft);
+        $orientationBMinGap = min($orientationBWidthLeft, $orientationBLengthLeft);
         return $orientationAMinGap - $orientationBMinGap ?: $a->getSurfaceFootprint() - $b->getSurfaceFootprint();
     }
     private function lookAheadDecider(ItemList $nextItems, OrientatedItem $a, OrientatedItem $b, $orientationAWidthLeft, $orientationBWidthLeft, $widthLeft, $lengthLeft, $depthLeft, $rowLength, $x, $y, $z, PackedItemList $prevPackedItemList)
@@ -140,7 +140,7 @@ class OrientatedItemSorter implements LoggerAwareInterface
         if ($this->singlePassMode) {
             return 0;
         }
-        $currentRowLength = \max($prevItem->getLength(), $currentRowLengthBeforePacking);
+        $currentRowLength = max($prevItem->getLength(), $currentRowLengthBeforePacking);
         $itemsToPack = $nextItems->topN(8);
         // cap lookahead as this gets recursive and slow
         $cacheKey = $originalWidthLeft . '|' . $originalLengthLeft . '|' . $prevItem->getWidth() . '|' . $prevItem->getLength() . '|' . $currentRowLength . '|' . $depthLeft;

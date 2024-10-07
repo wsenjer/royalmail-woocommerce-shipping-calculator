@@ -4,7 +4,7 @@ Donate link: https://wpruby.com
 Tags: Royal Mail,shipping method, DPD, Evri,woocommerce
 Requires at least: 5.0
 Tested up to: 6.5
-Stable tag: 1.9.0
+Stable tag: 1.9.1
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,8 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+= 1.9.1 07.10.2024 =
+Updated: Royal Mail October 2024 prices.
 
 = 1.9.0 04.04.2024 =
 Updated: Royal Mail April 2024 prices.

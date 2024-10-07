@@ -78,7 +78,7 @@ class PackedBoxList extends \SplMinHeap
      */
     public function getMeanWeight()
     {
-        if (!\is_null($this->meanWeight)) {
+        if (!is_null($this->meanWeight)) {
             return $this->meanWeight;
         }
         foreach (clone $this as $box) {
@@ -93,7 +93,7 @@ class PackedBoxList extends \SplMinHeap
      */
     public function getMeanItemWeight()
     {
-        if (!\is_null($this->meanItemWeight)) {
+        if (!is_null($this->meanItemWeight)) {
             return $this->meanItemWeight;
         }
         foreach (clone $this as $box) {
@@ -111,9 +111,9 @@ class PackedBoxList extends \SplMinHeap
         $mean = $this->getMeanWeight();
         $weightVariance = 0;
         foreach (clone $this as $box) {
-            $weightVariance += \pow($box->getWeight() - $mean, 2);
+            $weightVariance += pow($box->getWeight() - $mean, 2);
         }
-        return \round($weightVariance / $this->count(), 1);
+        return round($weightVariance / $this->count(), 1);
     }
     /**
      * Get volume utilisation of the set of packed boxes.
@@ -132,7 +132,7 @@ class PackedBoxList extends \SplMinHeap
                 $itemVolume += $item->getVolume();
             }
         }
-        return \round($itemVolume / $boxVolume * 100, 1);
+        return round($itemVolume / $boxVolume * 100, 1);
     }
     /**
      * Do a bulk insert.

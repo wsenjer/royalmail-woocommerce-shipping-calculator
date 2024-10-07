@@ -85,14 +85,14 @@ class LayerPacker implements LoggerAwareInterface
                 $layer->insert($packedItem);
                 $remainingWeightAllowed -= $itemToPack->getWeight();
                 $packedItemList->insert($packedItem);
-                $rowLength = \max($rowLength, $packedItem->getLength());
+                $rowLength = max($rowLength, $packedItem->getLength());
                 //Figure out if we can stack the next item vertically on top of this rather than side by side
                 //e.g. when we've packed a tall item, and have just put a shorter one next to it.
                 $this->packVerticallyInsideItemFootprint($layer, $packedItem, $packedItemList, $items, $remainingWeightAllowed, $guidelineLayerDepth, $rowLength, $x, $y, $z);
                 $x += $packedItem->getWidth();
                 $prevItem = $orientatedItem;
                 if ($items->count() === 0) {
-                    $items = ItemList::fromArray(\array_merge($skippedItems, \iterator_to_array($items)));
+                    $items = ItemList::fromArray(array_merge($skippedItems, iterator_to_array($items)));
                     $skippedItems = [];
                 }
                 continue;
@@ -113,14 +113,14 @@ class LayerPacker implements LoggerAwareInterface
                 $y += $rowLength;
                 $x = $rowLength = 0;
                 $skippedItems[] = $itemToPack;
-                $items = ItemList::fromArray(\array_merge($skippedItems, \iterator_to_array($items)));
+                $items = ItemList::fromArray(array_merge($skippedItems, iterator_to_array($items)));
                 $skippedItems = [];
                 $prevItem = null;
                 continue;
             }
             $this->logger->debug('no items fit, so starting next vertical layer');
             $skippedItems[] = $itemToPack;
-            $items = ItemList::fromArray(\array_merge($skippedItems, \iterator_to_array($items)));
+            $items = ItemList::fromArray(array_merge($skippedItems, iterator_to_array($items)));
             return $layer;
         }
         return $layer;
@@ -153,7 +153,7 @@ class LayerPacker implements LoggerAwareInterface
                 $stackSkippedItems[] = $items->extract();
             }
         }
-        $items = ItemList::fromArray(\array_merge($stackSkippedItems, \iterator_to_array($items)));
+        $items = ItemList::fromArray(array_merge($stackSkippedItems, iterator_to_array($items)));
     }
     /**
      * As well as purely dimensional constraints, there are other constraints that need to be met
@@ -185,8 +185,8 @@ class LayerPacker implements LoggerAwareInterface
         }
         $itemADimensions = [$itemA->getWidth(), $itemA->getLength(), $itemA->getDepth()];
         $itemBDimensions = [$itemB->getWidth(), $itemB->getLength(), $itemB->getDepth()];
-        \sort($itemADimensions);
-        \sort($itemBDimensions);
+        sort($itemADimensions);
+        sort($itemBDimensions);
         return $itemADimensions === $itemBDimensions;
     }
 }
