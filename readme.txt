@@ -3,7 +3,7 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,shipping method, DPD, Evri,woocommerce
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 1.9.1
 Requires PHP: 7.3
 License: GPLv2 or later

@@ -17,6 +17,17 @@ use WPRubyRoyalMail\Includes\WPRuby_RoyalMail_Item;
  * */
 class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
+
+
+    public $default_weight;
+    public $default_size;
+    public $parcel_size;
+    public $domestic_options;
+    public $debug_mode;
+    public $with_insurance;
+    public $enable_stripping_tax;
+
+
 	public $supported_services = array(
 		'firstclasssmall'					=>	'Standard First Class Small Parcel',
 		'firstclassmedium'					=>	'Standard First Class Medium Parcel',
@@ -35,6 +46,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 	public function __construct($instance_id = 0) {
 		$this->id = 'wpruby_royalmail';
 		$this->method_title = __('Royal Mail', 'wc-royal-mail');
+		$this->method_description = __('Display Royal Mail shipping prices at Checkout.', 'wc-royal-mail');
 		$this->title = __('Royal Mail', 'wc-royal-mail');
 		$this->instance_id = absint( $instance_id );
 		$this->init_form_fields();

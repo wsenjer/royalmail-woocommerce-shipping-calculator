@@ -31,18 +31,7 @@ class WPRuby_RoyalMail_Lite {
 		}
 
 		add_filter('woocommerce_shipping_methods', [$this, 'add_royal_mail_method']);
-		add_action('woocommerce_shipping_init', [$this, 'init_royal_mail']);
 
-	}
-
-	/**
-	 * Including the Shipping class.
-	 * */
-	public function init_royal_mail()
-	{
-		if (version_compare(WC()->version, '2.6.0', 'lt')){
-			require_once 'class-wc-royal-mail-shipping-method-legacy.php';
-		}
 	}
 
 	/**
@@ -50,11 +39,9 @@ class WPRuby_RoyalMail_Lite {
 	 * */
 	public function add_royal_mail_method( $methods )
 	{
-		if(version_compare(WC()->version, '2.6.0', 'lt')){
-			$methods['wpruby_royalmail'] = WC_Royal_Mail_Shipping_Method_Legacy::class;
-		}else{
-			$methods['wpruby_royalmail'] = WC_Royal_Mail_Shipping_Method::class;
-		}
+
+		$methods['wpruby_royalmail'] = WC_Royal_Mail_Shipping_Method::class;
+
 		return $methods;
 	}
 
