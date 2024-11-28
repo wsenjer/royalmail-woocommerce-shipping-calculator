@@ -3,8 +3,8 @@ Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,shipping method, DPD, Evri,woocommerce
 Requires at least: 5.0
-Tested up to: 6.6
-Stable tag: 1.9.2
+Tested up to: 6.7
+Stable tag: 1.9.3
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -180,6 +180,10 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 
 
 == Changelog ==
+
+= 1.9.3 28.11.2024 =
+* Added: WordPress 6.7 compatibility.
+
 = 1.9.2 25.10.2024 =
 Fixed: PHP 8 deprecations warnings.
 Removed: Royal Mail Legacy shipping method.
