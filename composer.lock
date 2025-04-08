@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fefd8260fecd099822955341411b8dbb",
+    "content-hash": "56009f0aa5cc9f82bdcc4f4a819030f1",
     "packages": [
         {
             "name": "dvdoug/boxpacker",
@@ -134,12 +134,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bamarni/composer-bin-plugin.git",
-                "reference": "e8faff2c9203b1f78359330a4c9d89954e0fc0b6"
+                "reference": "a633e8b06d8bc44d7ee70a8cbebaa6ab1084c31c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bamarni/composer-bin-plugin/zipball/e8faff2c9203b1f78359330a4c9d89954e0fc0b6",
-                "reference": "e8faff2c9203b1f78359330a4c9d89954e0fc0b6",
+                "url": "https://api.github.com/repos/bamarni/composer-bin-plugin/zipball/a633e8b06d8bc44d7ee70a8cbebaa6ab1084c31c",
+                "reference": "a633e8b06d8bc44d7ee70a8cbebaa6ab1084c31c",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
                 "issues": "https://github.com/bamarni/composer-bin-plugin/issues",
                 "source": "https://github.com/bamarni/composer-bin-plugin/tree/master"
             },
-            "time": "2023-09-17T20:07:45+00:00"
+            "time": "2024-11-05T11:41:17+00:00"
         }
     ],
     "aliases": [],
@@ -195,9 +195,9 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.0 || ^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*"
     },
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
