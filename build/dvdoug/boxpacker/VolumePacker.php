@@ -104,13 +104,13 @@ class VolumePacker implements LoggerAwareInterface
             }
             $boxPermutations[] = $boxPermutation;
         }
-        usort($boxPermutations, static function (PackedBox $a, PackedBox $b) {
+        \usort($boxPermutations, static function (PackedBox $a, PackedBox $b) {
             if ($a->getVolumeUtilisation() < $b->getVolumeUtilisation()) {
                 return 1;
             }
             return -1;
         });
-        return reset($boxPermutations);
+        return \reset($boxPermutations);
     }
     /**
      * Pack as many items as possible into specific given box.
@@ -129,7 +129,7 @@ class VolumePacker implements LoggerAwareInterface
             //do a preliminary layer pack to get the depth used
             $preliminaryItems = clone $items;
             $preliminaryLayer = $this->layerPacker->packLayer($preliminaryItems, clone $packedItemList, $layers, $layerStartDepth, $boxWidth, $boxLength, $this->box->getInnerDepth() - $layerStartDepth, 0);
-            if (count($preliminaryLayer->getItems()) === 0) {
+            if (\count($preliminaryLayer->getItems()) === 0) {
                 break;
             }
             if ($preliminaryLayer->getDepth() === $preliminaryLayer->getItems()[0]->getDepth()) {

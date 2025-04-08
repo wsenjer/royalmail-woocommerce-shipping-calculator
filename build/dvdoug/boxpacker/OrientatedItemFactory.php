@@ -67,7 +67,7 @@ class OrientatedItemFactory implements LoggerAwareInterface
         }
         $sorter = new OrientatedItemSorter($this, $this->singlePassMode, $widthLeft, $lengthLeft, $depthLeft, $nextItems, $rowLength, $x, $y, $z, $prevPackedItemList);
         $sorter->setLogger($this->logger);
-        usort($usableOrientations, $sorter);
+        \usort($usableOrientations, $sorter);
         $this->logger->debug('Selected best fit orientation', ['orientation' => $usableOrientations[0]]);
         return $usableOrientations[0];
     }
@@ -97,7 +97,7 @@ class OrientatedItemFactory implements LoggerAwareInterface
             }
         }
         if ($item instanceof ConstrainedPlacementItem && !$this->box instanceof WorkingVolume) {
-            $orientations = array_filter($orientations, function (OrientatedItem $i) use ($x, $y, $z, $prevPackedItemList) {
+            $orientations = \array_filter($orientations, function (OrientatedItem $i) use($x, $y, $z, $prevPackedItemList) {
                 return $i->getItem()->canBePacked($this->box, clone $prevPackedItemList, $x, $y, $z, $i->getWidth(), $i->getLength(), $i->getDepth());
             });
         }
@@ -140,11 +140,11 @@ class OrientatedItemFactory implements LoggerAwareInterface
          * We prefer to use stable orientations only, but allow unstable ones if
          * the item doesn't fit in the box any other way
          */
-        if (count($stableOrientations) > 0) {
+        if (\count($stableOrientations) > 0) {
             $orientationsToUse = $stableOrientations;
-        } elseif (count($unstableOrientations) > 0) {
+        } elseif (\count($unstableOrientations) > 0) {
             $stableOrientationsInEmptyBox = $this->getStableOrientationsInEmptyBox($item);
-            if (count($stableOrientationsInEmptyBox) === 0) {
+            if (\count($stableOrientationsInEmptyBox) === 0) {
                 $orientationsToUse = $unstableOrientations;
             }
         }
@@ -159,7 +159,7 @@ class OrientatedItemFactory implements LoggerAwareInterface
     protected function getStableOrientationsInEmptyBox(Item $item)
     {
         $orientationsInEmptyBox = $this->getPossibleOrientationsInEmptyBox($item);
-        return array_filter($orientationsInEmptyBox, function (OrientatedItem $orientation) {
+        return \array_filter($orientationsInEmptyBox, function (OrientatedItem $orientation) {
             return $orientation->isStable();
         });
     }

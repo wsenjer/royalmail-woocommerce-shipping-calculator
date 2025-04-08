@@ -118,7 +118,7 @@ class PackedBox
      */
     public function getItemWeight()
     {
-        if (!is_null($this->itemWeight)) {
+        if (!\is_null($this->itemWeight)) {
             return $this->itemWeight;
         }
         $this->itemWeight = 0;
@@ -233,7 +233,7 @@ class PackedBox
         foreach (clone $this->items as $item) {
             $itemVolume += $item->getVolume();
         }
-        return round($itemVolume / $this->box->getInnerVolume() * 100, 1);
+        return \round($itemVolume / $this->box->getInnerVolume() * 100, 1);
     }
     /**
      * @return PackedItemList
@@ -292,9 +292,9 @@ class PackedBox
         $maxWidth = $maxLength = $maxDepth = $weight = 0;
         /** @var PackedItem $item */
         foreach (clone $packedItems as $item) {
-            $maxWidth = max($maxWidth, $item->getX() + $item->getWidth());
-            $maxLength = max($maxLength, $item->getY() + $item->getLength());
-            $maxDepth = max($maxDepth, $item->getZ() + $item->getDepth());
+            $maxWidth = \max($maxWidth, $item->getX() + $item->getWidth());
+            $maxLength = \max($maxLength, $item->getY() + $item->getLength());
+            $maxDepth = \max($maxDepth, $item->getZ() + $item->getDepth());
             $weight += $item->getItem()->getWeight();
         }
         $packedBox = new self($box, $packedItems->asItemList(), $box->getInnerWidth() - $maxWidth, $box->getInnerLength() - $maxLength, $box->getInnerDepth() - $maxDepth, $box->getMaxWeight() - $box->getEmptyWeight() - $weight, $maxWidth, $maxLength, $maxDepth);

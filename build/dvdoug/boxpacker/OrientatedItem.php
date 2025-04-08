@@ -59,7 +59,7 @@ class OrientatedItem implements JsonSerializable
         $this->depth = $depth;
         $this->surfaceFootprint = $width * $length;
         $this->dimensionsAsArray = [$width, $length, $depth];
-        sort($this->dimensionsAsArray);
+        \sort($this->dimensionsAsArray);
     }
     /**
      * Item.
@@ -117,7 +117,7 @@ class OrientatedItem implements JsonSerializable
     {
         $cacheKey = $this->width . '|' . $this->length . '|' . $this->depth;
         if (!isset(static::$stabilityCache[$cacheKey])) {
-            static::$stabilityCache[$cacheKey] = atan(min($this->length, $this->width) / ($this->depth ?: 1)) > 0.261;
+            static::$stabilityCache[$cacheKey] = \atan(\min($this->length, $this->width) / ($this->depth ?: 1)) > 0.261;
         }
         return static::$stabilityCache[$cacheKey];
     }
@@ -132,7 +132,7 @@ class OrientatedItem implements JsonSerializable
             return \true;
         }
         $itemDimensions = [$item->getWidth(), $item->getLength(), $item->getDepth()];
-        sort($itemDimensions);
+        \sort($itemDimensions);
         return $this->dimensionsAsArray === $itemDimensions;
     }
     /**

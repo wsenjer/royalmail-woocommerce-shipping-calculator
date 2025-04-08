@@ -191,17 +191,17 @@ class Packer implements LoggerAwareInterface
                 $otherBoxes[] = $box;
             }
         }
-        return array_merge($preferredBoxes, $otherBoxes);
+        return \array_merge($preferredBoxes, $otherBoxes);
     }
     /**
      * @param PackedBox[] $packedBoxes
      */
     protected function findBestBoxFromIteration(array $packedBoxes)
     {
-        if (count($packedBoxes) === 0) {
+        if (\count($packedBoxes) === 0) {
             throw new NoBoxesAvailableException("No boxes could be found for item '{$this->items->top()->getDescription()}'", $this->items->top());
         }
-        usort($packedBoxes, [$this, 'compare']);
+        \usort($packedBoxes, [$this, 'compare']);
         return $packedBoxes[0];
     }
     private function sanityPrecheck()
@@ -212,7 +212,7 @@ class Packer implements LoggerAwareInterface
             /** @var Box $box */
             foreach (clone $this->boxes as $box) {
                 if ($item->getWeight() <= $box->getMaxWeight() - $box->getEmptyWeight()) {
-                    $possibleFits += count((new OrientatedItemFactory($box))->getPossibleOrientationsInEmptyBox($item));
+                    $possibleFits += \count((new OrientatedItemFactory($box))->getPossibleOrientationsInEmptyBox($item));
                 }
             }
             if ($possibleFits === 0) {

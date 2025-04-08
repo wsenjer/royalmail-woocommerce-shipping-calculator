@@ -16,7 +16,7 @@ abstract class LoggerInterfaceTest extends TestCase
     /**
      * @return LoggerInterface
      */
-    abstract public function getLogger();
+    public abstract function getLogger();
     /**
      * This must return the log messages in order.
      *
@@ -26,10 +26,10 @@ abstract class LoggerInterfaceTest extends TestCase
      *
      * @return string[]
      */
-    abstract public function getLogs();
+    public abstract function getLogs();
     public function testImplements()
     {
-        $this->assertInstanceOf('WPRubyRoyalMail\Build\Psr\Log\LoggerInterface', $this->getLogger());
+        $this->assertInstanceOf('WPRubyRoyalMail\\Build\\Psr\\Log\\LoggerInterface', $this->getLogger());
     }
     /**
      * @dataProvider provideLevelsAndMessages
@@ -63,10 +63,10 @@ abstract class LoggerInterfaceTest extends TestCase
     }
     public function testObjectCastToString()
     {
-        if (method_exists($this, 'createPartialMock')) {
-            $dummy = $this->createPartialMock('WPRubyRoyalMail\Build\Psr\Log\Test\DummyTest', array('__toString'));
+        if (\method_exists($this, 'createPartialMock')) {
+            $dummy = $this->createPartialMock('WPRubyRoyalMail\\Build\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         } else {
-            $dummy = $this->getMock('WPRubyRoyalMail\Build\Psr\Log\Test\DummyTest', array('__toString'));
+            $dummy = $this->getMock('WPRubyRoyalMail\\Build\\Psr\\Log\\Test\\DummyTest', array('__toString'));
         }
         $dummy->expects($this->once())->method('__toString')->will($this->returnValue('DUMMY'));
         $this->getLogger()->warning($dummy);
@@ -75,9 +75,9 @@ abstract class LoggerInterfaceTest extends TestCase
     }
     public function testContextCanContainAnything()
     {
-        $closed = fopen('php://memory', 'r');
-        fclose($closed);
-        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new DummyTest()), 'object' => new \DateTime(), 'resource' => fopen('php://memory', 'r'), 'closed' => $closed);
+        $closed = \fopen('php://memory', 'r');
+        \fclose($closed);
+        $context = array('bool' => \true, 'null' => null, 'string' => 'Foo', 'int' => 0, 'float' => 0.5, 'nested' => array('with object' => new DummyTest()), 'object' => new \DateTime(), 'resource' => \fopen('php://memory', 'r'), 'closed' => $closed);
         $this->getLogger()->warning('Crazy context data', $context);
         $expected = array('warning Crazy context data');
         $this->assertEquals($expected, $this->getLogs());

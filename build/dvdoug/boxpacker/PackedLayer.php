@@ -42,8 +42,8 @@ class PackedLayer
     {
         $this->items[] = $packedItem;
         $this->weight += $packedItem->getItem()->getWeight();
-        $this->startDepth = min($this->startDepth, $packedItem->getZ());
-        $this->endDepth = max($this->endDepth, $packedItem->getZ() + $packedItem->getDepth());
+        $this->startDepth = \min($this->startDepth, $packedItem->getZ());
+        $this->endDepth = \max($this->endDepth, $packedItem->getZ() + $packedItem->getDepth());
     }
     /**
      * Get the packed items.
@@ -64,8 +64,8 @@ class PackedLayer
         $layerWidth = 0;
         $layerLength = 0;
         foreach ($this->items as $item) {
-            $layerWidth = max($layerWidth, $item->getX() + $item->getWidth());
-            $layerLength = max($layerLength, $item->getY() + $item->getLength());
+            $layerWidth = \max($layerWidth, $item->getX() + $item->getWidth());
+            $layerLength = \max($layerLength, $item->getY() + $item->getLength());
         }
         return $layerWidth * $layerLength;
     }
