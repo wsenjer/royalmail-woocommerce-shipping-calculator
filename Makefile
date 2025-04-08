@@ -1,6 +1,6 @@
 pack:
 	composer install
-	composer bin php-scoper require --dev humbug/php-scoper
+	composer bin php-scoper require --dev humbug/php-scoper:0.17.5 --with-all-dependencies
 	./vendor/bin/php-scoper add-prefix --force
 	rm -rf build/bamarni
 	rm -rf build/composer
