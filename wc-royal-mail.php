@@ -1,8 +1,8 @@
 <?php
 /* @wordpress-plugin
- * Plugin Name:       WooCommerce Royal Mail Shipping Calculator
+ * Plugin Name:       Royal Mail Shipping Calculator for WooCommerce
  * Plugin URI:        https://wpruby.com
- * Description:       WooCommerce Royal Mail Shipping Calculator
+ * Description:       Royal Mail Shipping Calculator for WooCommerce
  * Version:           1.9.4
  * WC requires at least: 5.0
  * WC tested up to: 9.7

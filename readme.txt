@@ -1,4 +1,4 @@
-=== WooCommerce Royal Mail Shipping Calculator ===
+=== Royal Mail Shipping Calculator for WooCommerce ===
 Contributors: waseem_senjer, wprubyplugins
 Donate link: https://wpruby.com
 Tags: Royal Mail,shipping method, DPD, Evri,woocommerce
@@ -9,11 +9,11 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service.
+Royal Mail Shipping Calculator for WooCommerce is a WordPress Plugin that integrate the Royal Mail service.
 
 
 == Description ==
-WooCommerce Royal Mail Shipping Calculator is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer.
+Royal Mail Shipping Calculator for WooCommerce is a WordPress Plugin that integrate the Royal Mail service, it will calculate the shipping cost and the delivery time for your customer.
 
 If you have any issues or questions, please open a thread in the WordPress.org forum, or you can open a [support ticket](wpruby.com/submit-ticket/ "support ticket") on our website.
 
@@ -157,7 +157,7 @@ Cut to the Chase and provide the cheapest option to your customers without putti
 = Using The WordPress Dashboard =
 
 1. Navigate to the 'Add New' in the plugins dashboard
-2. Search for 'WooCommerce Royal Mail Shipping Calculator'
+2. Search for 'Royal Mail Shipping Calculator for WooCommerce'
 3. Click 'Install Now'
 4. Activate the plugin on the Plugin dashboard
 
