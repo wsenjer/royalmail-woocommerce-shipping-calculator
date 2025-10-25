@@ -1,7 +1,7 @@
 <?php
 // Check if the notice should be shown (not dismissed within the last 2 weeks)
 $current_user_id = get_current_user_id();
-$dismissed_time = get_user_meta($current_user_id, 'rulehook_royalmail_promo_dismissed', true);
+$dismissed_time = get_user_meta($current_user_id, '3rulehook_royalmail_promo_dismissed', true);
 $show_rulehook_notice = empty($dismissed_time) || (time() - intval($dismissed_time) > 14 * DAY_IN_SECONDS);
 ?>
 
@@ -62,7 +62,7 @@ if ($show_rulehook_notice) :
                     <div class="inside">
                         <div class="rulehook-widget">
                             <div class="rulehook-logo">
-                                <img src="<?php echo plugin_dir_url(__FILE__).'assets/images/wpruby_logo.png' ?>">
+                                <img style="width: 25%" alt="RuleHook" src="https://cdn.wpruby.com/wp-content/uploads/2025/10/25143333/rulehook.png">
                             </div>
                             <h4>Advanced Shipping Rules Made Simple</h4>
                             <p>Create flexible shipping rules based on:</p>
@@ -111,7 +111,7 @@ if ($show_rulehook_notice) :
                     <div class="inside">
                         <div class="support-widget">
                             <div class="logo-container">
-                                <img src="<?php echo plugin_dir_url(__FILE__).'assets/images/wpruby_logo.png' ?>">
+                                <img alt="WPRuby" src="https://cdn.wpruby.com/wp-content/uploads/2024/12/01122141/wpruby-logo-wide-1.png">
                             </div>
                             <p>Got a Question, Idea, Problem or Praise?</p>
                             <ul class="support-links">
@@ -293,7 +293,7 @@ if ($show_rulehook_notice) :
 
     /* RuleHook Styles */
     .royal-mail-rulehook {
-        border-left: 3px solid #673AB7;
+        border-left: 3px solid #00d492;
     }
 
     .rulehook-logo {
@@ -309,7 +309,7 @@ if ($show_rulehook_notice) :
     .rulehook-widget h4 {
         text-align: center;
         margin: 0 0 15px 0;
-        color: #673AB7;
+        color: #038e62;
         font-weight: 600;
     }
 
@@ -325,13 +325,13 @@ if ($show_rulehook_notice) :
     }
 
     .rulehook-features .dashicons {
-        color: #673AB7;
+        color: #00d492;
         margin-right: 5px;
     }
 
     .rulehook-button {
-        background-color: #673AB7 !important;
-        border-color: #5E35B1 !important;
+        background-color: #00d492 !important;
+        border-color: #0dd696 !important;
         color: #ffffff !important;
         width: 100%;
         padding: 10px !important;
@@ -346,13 +346,13 @@ if ($show_rulehook_notice) :
     }
 
     .rulehook-button:hover {
-        background-color: #5E35B1 !important;
+        background-color: #038e62 !important;
         box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
     /* Inline Promo Styles */
     #rulehook-promo-notice {
-        border-left-color: #673AB7;
+        border-left-color: #00d492;
         padding: 15px;
         position: relative;
     }
@@ -366,15 +366,15 @@ if ($show_rulehook_notice) :
     }
 
     #rulehook-promo-notice .button-primary {
-        background: #673AB7;
-        border-color: #5E35B1;
-        box-shadow: 0 1px 0 #5E35B1;
+        background: #00d492;
+        border-color: #0dd696;
+        box-shadow: 0 1px 0 #4b8b3d;
     }
 
     #rulehook-promo-notice .button-primary:hover {
-        background: #5E35B1;
-        border-color: #512DA8;
-        box-shadow: 0 1px 0 #512DA8;
+        background: #038e62;
+        border-color: #059164;
+        box-shadow: 0 1px 0 #038e62;
     }
 
     /* Fix for WP admin */
