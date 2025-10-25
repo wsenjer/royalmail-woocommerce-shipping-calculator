@@ -62,7 +62,7 @@ if ($show_rulehook_notice) :
                     <div class="inside">
                         <div class="rulehook-widget">
                             <div class="rulehook-logo">
-                                <img style="width: 25%" alt="RuleHook" src="https://cdn.wpruby.com/wp-content/uploads/2025/10/25143333/rulehook.png">
+                                <img style="width: 25%" alt="RuleHook" src="https://cdn.wpruby.com/wp-content/uploads/2025/10/25201709/rulehook-1.png">
                             </div>
                             <h4>Advanced Shipping Rules Made Simple</h4>
                             <p>Create flexible shipping rules based on:</p>
