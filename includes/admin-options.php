@@ -1,7 +1,7 @@
 <?php
 // Check if the notice should be shown (not dismissed within the last 2 weeks)
 $current_user_id = get_current_user_id();
-$dismissed_time = get_user_meta($current_user_id, '3rulehook_royalmail_promo_dismissed', true);
+$dismissed_time = get_user_meta($current_user_id, 'rulehook_royalmail_promo_dismissed', true);
 $show_rulehook_notice = empty($dismissed_time) || (time() - intval($dismissed_time) > 14 * DAY_IN_SECONDS);
 ?>
 
