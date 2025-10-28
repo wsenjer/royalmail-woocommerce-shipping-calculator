@@ -21,24 +21,6 @@ if ($show_rulehook_notice) :
         <p><strong>Meet RuleHook</strong> — create flexible shipping rules in Shopify and WooCommerce by weight, postcode, cart total, and product tags. No code required.</p>
         <p><a href="https://rulehook.com/woocommerce?utm_source=royal-mail-plugin&utm_medium=plugin-notice&utm_campaign=cross-promotion" class="button button-primary" target="_blank">Learn More →</a></p>
     </div>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            // Handle the dismiss button click for RuleHook promo
-            $(document).on('click', '#rulehook-promo-notice .notice-dismiss', function() {
-                $.ajax({
-                    url: ajaxurl,
-                    type: 'POST',
-                    data: {
-                        action: 'dismiss_royalmail_rulehook_notice',
-                        security: '<?php echo wp_create_nonce('rulehook_royalmail_dismiss_nonce'); ?>'
-                    },
-                    success: function(response) {
-                        $('#rulehook-promo-notice').fadeOut(300, function() { $(this).remove(); });
-                    }
-                });
-            });
-        });
-    </script>
 <?php endif; ?>
 
 <div id="poststuff">
@@ -53,6 +35,9 @@ if ($show_rulehook_notice) :
                 }
                 ?>
             </table><!--/.form-table-->
+            <p class="submit">
+                <button name="save" disabled="" class="woocommerce-save-button components-button is-primary" type="submit" value="Save changes">Save changes</button>
+            </p>
         </div>
         <div id="postbox-container-1" class="postbox-container">
             <div id="side-sortables" class="meta-box-sortables ui-sortable">
@@ -330,7 +315,7 @@ if ($show_rulehook_notice) :
     }
 
     .rulehook-button {
-        background-color: #00d492 !important;
+        background-color: #038e62 !important;
         border-color: #0dd696 !important;
         color: #ffffff !important;
         width: 100%;
@@ -346,7 +331,7 @@ if ($show_rulehook_notice) :
     }
 
     .rulehook-button:hover {
-        background-color: #038e62 !important;
+        background-color: #00d492 !important;
         box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
@@ -382,3 +367,22 @@ if ($show_rulehook_notice) :
         margin-top: 11px !important;
     }
 </style>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        // Handle the dismiss button click for RuleHook promo
+        $(document).on('click', '#rulehook-promo-notice .notice-dismiss', function() {
+            $.ajax({
+                url: ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'dismiss_royalmail_rulehook_notice',
+                    security: '<?php echo wp_create_nonce('rulehook_royalmail_dismiss_nonce'); ?>'
+                },
+                success: function(response) {
+                    $('#rulehook-promo-notice').fadeOut(300, function() { $(this).remove(); });
+                }
+            });
+        });
+        $('.submit .woocommerce-save-button').eq(1).remove();
+    });
+</script>
