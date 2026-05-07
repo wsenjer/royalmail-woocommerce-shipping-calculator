@@ -25,6 +25,7 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
     public $domestic_options;
     public $debug_mode;
     public $with_insurance;
+    public $insurance_threshold;
     public $enable_stripping_tax;
 
 
@@ -65,11 +66,12 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 
 		$this->parcel_size = $this->get_option('parcel_size');
 
-		$this->domestic_options = $this->get_option('domestic_options');
+        $this->domestic_options = $this->get_option('domestic_options');
 
-		$this->debug_mode = $this->get_option('debug_mode');
-		$this->with_insurance = $this->get_option('with_insurance');
-		$this->enable_stripping_tax = $this->get_option('enable_stripping_tax');
+        $this->debug_mode = $this->get_option('debug_mode');
+        $this->with_insurance = $this->get_option('with_insurance');
+        $this->insurance_threshold = floatval($this->get_option('insurance_threshold', 0));
+        $this->enable_stripping_tax = $this->get_option('enable_stripping_tax');
 
 		add_action('woocommerce_update_options_shipping_' . $this->id, array($this, 'process_admin_options'));
 	}
@@ -121,19 +123,25 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
 				'css' 		=> 'width:80%;',
 				'options' 	=> $this->supported_services,
 			),
-			'with_insurance' => array(
-				'title' => __('Consider Insurance', 'wc-royal-mail'),
-				'type' => 'checkbox',
-				'label' => __('Enable ', 'wc-royal-mail'),
-				'default' => 'no',
-				'description' => __('If enabled, the plugin will consider, the amount of the package as a compensation amount, some services might be unavailable if the items in the package has a high price',  'wc-royal-mail'),
-			),
-			'enable_stripping_tax' => array(
-				'title' => __('Remove Tax', 'wc-royal-mail'),
-				'type' => 'checkbox',
-				'default' => 'no',
-				'label' => __('Enable', 'wc-royal-mail'),
-				'description' => __('Hint: Enabling this option will strip the tax value (20%) from the shipping prices coming from Royal Mail.', 'wc-royal-mail'),
+            'with_insurance' => array(
+                'title' => __('Consider Insurance', 'wc-royal-mail'),
+                'type' => 'checkbox',
+                'label' => __('Enable ', 'wc-royal-mail'),
+                'default' => 'no',
+                'description' => __('If enabled, the plugin will consider, the amount of the package as a compensation amount, some services might be unavailable if the items in the package has a high price',  'wc-royal-mail'),
+            ),
+            'insurance_threshold' => array(
+                'title' => __('Insurance Threshold', 'wc-royal-mail'),
+                'type' => 'price',
+                'default' => '0',
+                'description' => __('If set, the plugin will only consider the package value for insurance when it is greater than this amount. Leave as 0 to always consider the full package value.', 'wc-royal-mail'),
+            ),
+            'enable_stripping_tax' => array(
+                'title' => __('Remove Tax', 'wc-royal-mail'),
+                'type' => 'checkbox',
+                'default' => 'no',
+                'label' => __('Enable', 'wc-royal-mail'),
+                'description' => __('Hint: Enabling this option will strip the tax value (20%) from the shipping prices coming from Royal Mail.', 'wc-royal-mail'),
 			),
 		);
 
@@ -169,16 +177,24 @@ class WC_Royal_Mail_Shipping_Method extends WC_Shipping_Method {
         	$allowedMethods = $this->getAllowedMethods($pack, $package['destination']['country']);
 	        if (empty($allowedMethods) == false) {
 
-	            // NEEDS INVESTIGATION
-	            $dataClass->setWeightUnit(strtolower(get_option('woocommerce_weight_unit')));
-	            $dataClass->_setWeight($pack['weight']);
+                // NEEDS INVESTIGATION
+                $dataClass->setWeightUnit(strtolower(get_option('woocommerce_weight_unit')));
+                $dataClass->_setWeight($pack['weight']);
 
-	            $value = ($this->with_insurance === 'yes') ? $pack['value']: 1;
-	            $calculatedMethods = $calculateMethodClass->getMethods(
-	            	$package['destination']['country'],
-		            $value,
-	                $pack['weight']
-	            );
+                $package_value = isset($pack['value']) ? floatval($pack['value']) : 0;
+                $value = 1;
+                if ($this->with_insurance === 'yes') {
+                    if ($this->insurance_threshold > 0 && $package_value <= $this->insurance_threshold) {
+                        $value = 1;
+                    } else {
+                        $value = $package_value;
+                    }
+                }
+                $calculatedMethods = $calculateMethodClass->getMethods(
+                    $package['destination']['country'],
+                    $value,
+                    $pack['weight']
+                );
 	            // Config check to remove small or medium parcel size based on the
 	            // config value set in the admin panel
                 if ($this->parcel_size == 'small' && $this->is_small_parcel($pack) ) {
